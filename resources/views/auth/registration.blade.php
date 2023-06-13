@@ -44,7 +44,7 @@
                             <div class="form-group row">
                                 <label for="password_confirmation" class="col-md-4 col-form-label text-md-right">Password confirm</label>
                                 <div class="col-md-6">
-                                    <input type="password" id="passwordConf" class="form-control" name="password_confirmation" required>
+                                    <input type="password" id="password_confirmation" class="form-control" name="password_confirmation" required>
                                     @if ($errors->has('password'))
                                     <span class="text-danger">{{ $errors->first('password') }}</span>
                                     @endif
