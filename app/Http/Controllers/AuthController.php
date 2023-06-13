@@ -54,7 +54,7 @@ class AuthController extends Controller
         return redirect("dashboard")->withSuccess('Bienvenu à bord du Kraken, pirate !');
     }
 
-    public function dashboard(): RedirectResponse
+    public function dashboard()
     {
         if (Auth::check()) {
             return view('dashboard');
