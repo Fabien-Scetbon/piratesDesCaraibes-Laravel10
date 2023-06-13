@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Ressource extends Model
 {
@@ -16,4 +17,9 @@ class Ressource extends Model
         'quantite',
         'type',
     ];
+
+    public function navireRessource(): BelongsTo
+    {
+        return $this->belongsTo(Navire::class);
+    }
 }

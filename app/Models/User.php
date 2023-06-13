@@ -4,6 +4,8 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -18,8 +20,15 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'nom',
+        'prenom',
+        'pseudo',
         'email',
         'password',
+        'age',
+        'description',
+        'specialites',
+        'navire_id',
         'role'
     ];
 
@@ -42,4 +51,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',  // indique comment les valeurs doivent etre traitees
         'password' => 'hashed',
     ];
+
+    public function navireUser(): BelongsTo
+    {
+        return $this->belongsTo(Navire::class);
+    }
+
+    public function specialites(): BelongsToMany
+    {
+        return $this->belongsToMany(Specialite::class);
+    }
 }

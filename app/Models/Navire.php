@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Navire extends Model
 {
@@ -24,4 +25,19 @@ class Navire extends Model
         'pavillon',
         'pont',
     ];
+
+    public function users(): HasMany
+    {
+        return $this->hasMany(User::class);
+    }
+
+    public function ressources(): HasMany
+    {
+        return $this->hasMany(Ressource::class);
+    }
+
+    public function tresors(): HasMany
+    {
+        return $this->hasMany(Tresor::class);
+    }
 }
