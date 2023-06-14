@@ -27,9 +27,8 @@ class User extends Authenticatable
         'password',
         'age',
         'description',
-        'specialites',
         'navire_id',
-        'is_capitaine'
+        'is_capitaine',
     ];
 
     /**
@@ -59,6 +58,6 @@ class User extends Authenticatable
 
     public function specialites(): BelongsToMany
     {
-        return $this->belongsToMany(Specialite::class);
+        return $this->belongsToMany(Specialite::class, 'specialite_user');
     }
 }
