@@ -46,15 +46,15 @@ class NavireSeeder extends Seeder
         // 3
         $navire             = new Navire();
         $navire->nom        = "La Murene";
-        $navire->bois       = "Sapin";
-        $navire->coque      = 6;
-        $navire->misaine    = 7;
+        $navire->bois       = "Hetre";
+        $navire->coque      = 4;
+        $navire->misaine    = 6;
         $navire->mat        = 8;
-        $navire->cachots    = 6;
-        $navire->cabines    = 6;
-        $navire->gouvernail = 5;
-        $navire->voiles     = 9;
-        $navire->pavillon   = 6;
+        $navire->cachots    = 5;
+        $navire->cabines    = 3;
+        $navire->gouvernail = 7;
+        $navire->voiles     = 6;
+        $navire->pavillon   = 5;
         $navire->pont       = 4;
         $navire->save();
         
