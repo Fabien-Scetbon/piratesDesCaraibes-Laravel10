@@ -20,6 +20,9 @@ class DatabaseSeeder extends Seeder
         // ]);
         $this->call([
             NavireSeeder::class,
+            RessourceSeeder::class,
+            TresorSeeder::class,
+            SpecialiteSeeder::class,
         ]);
     }
 }

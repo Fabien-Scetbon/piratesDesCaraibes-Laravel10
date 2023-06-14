@@ -18,6 +18,7 @@ class Tresor extends Model
         'prix',
         'poids',
         'etat',
+        'navire_id',
     ];
 
     public function navireTresor(): BelongsTo

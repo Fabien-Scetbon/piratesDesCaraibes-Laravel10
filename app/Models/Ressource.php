@@ -16,6 +16,7 @@ class Ressource extends Model
         'nom',
         'quantite',
         'type',
+        'navire_id',
     ];
 
     public function navireRessource(): BelongsTo
