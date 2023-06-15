@@ -14,13 +14,13 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('nom');
-            $table->string('prenom');
-            $table->string('pseudo');
+            $table->string('prenom')->nullable();
+            $table->string('pseudo')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->integer('age');
-            $table->longText('description');
+            $table->integer('age')->nullable();
+            $table->longText('description')->nullable();
             $table->foreignId('navire_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->tinyInteger('is_capitaine')->default(0);
             $table->rememberToken();

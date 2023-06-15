@@ -12,11 +12,11 @@
                         <form action="{{ route('register.post') }}" method="POST">
                             @csrf
                             <div class="form-group row">
-                                <label for="name" class="col-md-4 col-form-label text-md-right">Name</label>
+                                <label for="nom" class="col-md-4 col-form-label text-md-right">Nom</label>
                                 <div class="col-md-6">
-                                    <input type="text" id="name" class="form-control" name="name" required autofocus>
-                                    @if ($errors->has('name'))
-                                    <span class="text-danger">{{ $errors->first('name') }}</span>
+                                    <input type="text" id="nom" class="form-control" name="nom" required autofocus>
+                                    @if ($errors->has('nom'))
+                                    <span class="text-danger">{{ $errors->first('nom') }}</span>
                                     @endif
                                 </div>
                             </div>

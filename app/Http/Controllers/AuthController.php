@@ -42,7 +42,7 @@ class AuthController extends Controller
     public function postRegistration(Request $request): RedirectResponse
     {
         $request->validate([
-            'name'                  => 'bail|required',
+            'nom'                  => 'bail|required',
             'email'                 => 'bail|required|email|unique:users',
             'password'              => 'bail|required|confirmed|min:6',
             'password_confirmation' => 'bail|required'
@@ -66,7 +66,7 @@ class AuthController extends Controller
     public function createUser(array $data)
     {
         return User::create([
-            'name'      => $data['name'],
+            'nom'      => $data['nom'],
             'email'     => $data['email'],
             'password'  => Hash::make($data['password'])
         ]);
