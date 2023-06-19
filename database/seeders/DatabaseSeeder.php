@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             SpecialiteSeeder::class,
+            SpecialiteUserSeeder::class,
             RessourceSeeder::class,
             TresorSeeder::class,
         ]);

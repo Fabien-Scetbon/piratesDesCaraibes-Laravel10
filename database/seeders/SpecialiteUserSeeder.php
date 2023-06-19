@@ -14,8 +14,22 @@ class SpecialiteUserSeeder extends Seeder
      */
     public function run(): void
     {
-        User::All()->each(function ($user) {
-            $specialites = [Specialite::all()->random()->id, Specialite::all()->random()->id];
+        User::all()->each(function ($user) {
+            $specialiteIds = Specialite::pluck('id')->toArray(); 
+    
+            $specialites = [];
+
+            $statNumber = [1, 1, 1, 2, 2, 3];
+    
+            $numElements = $statNumber[array_rand($statNumber)];
+    
+            while (count($specialites) < $numElements) {
+                $randomKey = array_rand($specialiteIds); 
+                if (!in_array($specialiteIds[$randomKey], $specialites)) {
+                    $specialites[] = $specialiteIds[$randomKey];
+                }
+            }
+    
             $user->specialites()->attach($specialites);
         });
     }
