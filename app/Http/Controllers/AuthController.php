@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Navire;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -20,7 +21,11 @@ class AuthController extends Controller
 
     public function registration(): View
     {
-        return view('auth.registration');
+        $navires = Navire::all();
+
+        return view('auth.registration', [
+            'navires' => $navires,
+        ]);
     }
 
     public function postLogin(Request $request): RedirectResponse
@@ -51,7 +56,7 @@ class AuthController extends Controller
         $data = $request->all();
         $check = $this->createUser($data);
 
-        return redirect("dashboard")->withSuccess('Bienvenu à bord du Kraken, pirate !');
+        return redirect("dashboard")->withSuccess('Bienvenu à bord du Navire, pirate !');
     }
 
     public function dashboard()
@@ -68,7 +73,8 @@ class AuthController extends Controller
         return User::create([
             'nom'      => $data['nom'],
             'email'     => $data['email'],
-            'password'  => Hash::make($data['password'])
+            'password'  => Hash::make($data['password']),
+            'navire_id' => 1,
         ]);
     }
 

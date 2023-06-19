@@ -52,6 +52,15 @@
                             </div>
 
                             <div class="form-group row">
+                                <select class="form-select" name="navire_id" aria-label="Default select example">
+                                    <option selected>Choisis ton navire :</option>
+                                    @foreach ($navires as $navire)
+                                        <option value="{{ $navire->id }}">{{ $navire->nom }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="form-group row">
                                 <div class="col-md-6 offset-md-4">
                                     <div class="checkbox">
                                         <label>
