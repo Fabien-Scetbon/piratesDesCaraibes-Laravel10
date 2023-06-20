@@ -21,6 +21,6 @@ class Ressource extends Model
 
     public function navireRessource(): BelongsTo
     {
-        return $this->belongsTo(Navire::class);
+        return $this->belongsTo(Navire::class, 'navire_id');
     }
 }

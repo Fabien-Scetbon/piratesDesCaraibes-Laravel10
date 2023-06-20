@@ -23,6 +23,6 @@ class Tresor extends Model
 
     public function navireTresor(): BelongsTo
     {
-        return $this->belongsTo(Navire::class);
+        return $this->belongsTo(Navire::class, 'navire_id');
     }
 }

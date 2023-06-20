@@ -53,7 +53,7 @@ class User extends Authenticatable
 
     public function navireUser(): BelongsTo
     {
-        return $this->belongsTo(Navire::class);
+        return $this->belongsTo(Navire::class, 'navire_id'); // QUESTION : ne marche pas sans navire_id, pourquoi ?
     }
 
     public function specialites(): BelongsToMany

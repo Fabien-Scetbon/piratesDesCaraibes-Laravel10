@@ -37,8 +37,11 @@ class AuthController extends Controller
 
         $credentials = $request->only('email', 'password');  // only : ne recupere que email et pass dans l'obj $request
         if (Auth::attempt($credentials)) {
+            $navire = Auth::user()->navireUser->nom;
+            //$navire_id = Auth::user()->navire_id;
+            // $navire = Navire::where('id', $navire_id)->first()->nom;
             return redirect()->intended('dashboard') // renvoie autom l'user vers la page a laquelle il tentait d'acceder avant connex (ici soit dashboard, soit une page protegee)
-                ->withSuccess('Tu peux monter à bord du Kraken, pirate !'); // ajoute mess a session flash de Laravel, detruit apres utilisation
+                ->withSuccess('Tu peux monter à bord du ' . $navire . ', pirate !'); // ajoute mess a session flash de Laravel, detruit apres utilisation
         }
 
         return redirect("login")->withSuccess('Tu ne fais pas partie des membres d\'équipage ! Dégage !');
