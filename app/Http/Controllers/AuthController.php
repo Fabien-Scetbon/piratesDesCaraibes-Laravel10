@@ -31,17 +31,18 @@ class AuthController extends Controller
     public function postLogin(Request $request): RedirectResponse
     {
         $request->validate([
-            'email'     => 'required',
+            'email'     => 'required|email',
             'password'  => 'required',
         ]);
 
         $credentials = $request->only('email', 'password');  // only : ne recupere que email et pass dans l'obj $request
         if (Auth::attempt($credentials)) {
             $navire = Auth::user()->navireUser->nom;
-            //$navire_id = Auth::user()->navire_id;
-            // $navire = Navire::where('id', $navire_id)->first()->nom;
+            $pseudo = Auth::user()->pseudo;
+            
+            
             return redirect()->intended('dashboard') // renvoie autom l'user vers la page a laquelle il tentait d'acceder avant connex (ici soit dashboard, soit une page protegee)
-                ->withSuccess('Tu peux monter à bord du ' . $navire . ', pirate !'); // ajoute mess a session flash de Laravel, detruit apres utilisation
+                ->withSuccess('Tu peux monter à bord du ' . $navire . ', '.$pseudo.' !'); // ajoute mess a session flash de Laravel, detruit apres utilisation
         }
 
         return redirect("login")->withSuccess('Tu ne fais pas partie des membres d\'équipage ! Dégage !');
@@ -50,7 +51,7 @@ class AuthController extends Controller
     public function postRegistration(Request $request): RedirectResponse
     {
         $request->validate([
-            'nom'                  => 'bail|required',
+            'pseudo'                => 'bail|required',
             'email'                 => 'bail|required|email|unique:users',
             'password'              => 'bail|required|confirmed|min:6',
             'password_confirmation' => 'bail|required'
@@ -68,13 +69,13 @@ class AuthController extends Controller
             return view('dashboard');
         }
 
-        return redirect("login")->withSuccess('Tu as trop bu, pirate ? Tu ne sais plus qui tu es ?');
+        return redirect("login")->withSuccess('Tu dois montrer patte blanche, pirate !');
     }
 
     public function createUser(array $data)
     {
         return User::create([
-            'nom'      => $data['nom'],
+            'pseudo'    => $data['pseudo'],
             'email'     => $data['email'],
             'password'  => Hash::make($data['password']),
             'navire_id' => $data['navire_id'],
