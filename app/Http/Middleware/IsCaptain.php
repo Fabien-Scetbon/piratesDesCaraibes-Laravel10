@@ -16,12 +16,12 @@ class IsCaptain
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::user()->is_capitaine == 1) {
+        if (Auth::user() && Auth::user()->is_capitaine == 1) {
+            dd(Auth::user());
             return $next($request);
-        } else {
-            return redirect("/")
-                ->withSuccess('Welcome ' . Auth::user()->login); //->withSuccess('Opps! You do not have access');
-
         }
+        dd(Auth::user());
+        return redirect("/")
+            ->withSuccess('Welcome '); //->withSuccess('Opps! You do not have access');
     }
 }

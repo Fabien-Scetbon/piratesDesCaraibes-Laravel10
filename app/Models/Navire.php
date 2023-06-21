@@ -24,6 +24,7 @@ class Navire extends Model
         'voiles',
         'pavillon',
         'pont',
+        'canons'
     ];
 
     public function users(): HasMany

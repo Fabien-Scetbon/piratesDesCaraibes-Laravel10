@@ -24,6 +24,7 @@ return new class extends Migration
             $table->integer('voiles')->default(10);
             $table->integer('pavillon')->default(10);
             $table->integer('pont')->default(10);
+            $table->integer('canons')->default(10);
             $table->timestamps();
         });
     }

@@ -26,6 +26,7 @@ class NavireSeeder extends Seeder
         $navire->voiles     = 5;
         $navire->pavillon   = 6;
         $navire->pont       = 9;
+        $navire->canons     = 6;
         $navire->save();
 
         // 2
@@ -41,6 +42,7 @@ class NavireSeeder extends Seeder
         $navire->voiles     = 9;
         $navire->pavillon   = 6;
         $navire->pont       = 4;
+        $navire->canons     = 2;
         $navire->save();
 
         // 3
@@ -56,6 +58,7 @@ class NavireSeeder extends Seeder
         $navire->voiles     = 6;
         $navire->pavillon   = 5;
         $navire->pont       = 4;
+        $navire->canons     = 5;
         $navire->save();
         
     }
