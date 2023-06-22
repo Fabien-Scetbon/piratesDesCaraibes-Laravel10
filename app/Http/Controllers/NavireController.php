@@ -9,6 +9,18 @@ use Illuminate\View\View;
 
 class NavireController extends Controller
 {
+    private function getEtat($navire): Int
+    {
+        $etat = 0;
+        foreach ($navire->getFillable() as $item) {
+            if (is_int($navire->$item)) {
+                $etat += $navire->$item;
+            }
+        }
+
+        return $etat;
+    }
+    
     public function getNavires(): View
     {
         $navires = Navire::all();
@@ -16,13 +28,7 @@ class NavireController extends Controller
             $count = User::where('navire_id', $navire->id)->count();
             $navire->count = $count;
 
-            $etat = 0;
-            foreach ($navire->getFillable() as $index => $item) {
-                if (is_int($navire->$item)) {
-                    $etat += $navire->$item;
-                }
-            }
-
+            $etat = $this->getEtat($navire);
             $navire->etat = $etat;
         }
 
@@ -37,7 +43,7 @@ class NavireController extends Controller
         $count = User::where('navire_id', $navire->id)->count();
         $navire->count = $count;
 
-        $etat = $navire->coque + $navire->misaine + $navire->mat + $navire->cachots + $navire->cabines + $navire->gouvernail + $navire->voiles + $navire->pavillon + $navire->pont + $navire->canons; // QUESTION faire plus simple ?
+        $etat = $this->getEtat($navire);
         $navire->etat = $etat;
 
         return view('navires.navire', [
