@@ -32,21 +32,29 @@
                                             <tr>                                                
                                                 <th scope="row">{{ $user->id }}</th>
                                                 <td>{{ $user->navire }}</td>
-                                                <td>{{ $user->nom }}</td>
-                                                <td>{{ $user->prenom }}</td>
+                                                <td>{{ $user->nom ?? 'inconnu' }}</td>
+                                                <td>{{ $user->prenom ?? 'inconnu' }}</td>
                                                 <td>{{ $user->pseudo }}</td>
                                                 <td>{{ $user->email }}</td>
-                                                <td>{{ $user->age }}</td>
+                                                <td>{{ $user->age ?? 'inconnu' }}</td>
                                                 <td>
-                                                    {{ substr($user->description, 0, 20) }}
-                                                @if (strlen($user->description)>20)
-                                                    ...
+                                                @if ($user->description)
+                                                        {{ substr($user->description, 0, 20) }}
+                                                    @if (strlen($user->description) > 20)
+                                                        ...
+                                                    @endif
+                                                @else
+                                                    inconnue
                                                 @endif
                                                 </td>
                                                 <td>
+                                                @if (count($user->specialites) != 0)
                                                     @foreach($user->specialites as $specialite)
-                                                    {{ $specialite->nom }}</br>
+                                                        {{ $specialite->nom }}</br>
                                                     @endforeach
+                                                @else
+                                                    inconnues
+                                                @endif
                                                 </td>
                                                 <td>
                                                 @if($user->is_capitaine)
