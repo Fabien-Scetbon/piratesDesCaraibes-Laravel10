@@ -16,7 +16,13 @@ class NavireController extends Controller
             $count = User::where('navire_id', $navire->id)->count();
             $navire->count = $count;
 
-            $etat = $navire->coque + $navire->misaine + $navire->mat + $navire->cachots + $navire->cabines + $navire->gouvernail + $navire->voiles + $navire->pavillon + $navire->pont + $navire->canons; // QUESTION faire plus simple ?
+            $etat = 0;
+            foreach ($navire->getFillable() as $index => $item) {
+                if (is_int($navire->$item)) {
+                    $etat += $navire->$item;
+                }
+            }
+
             $navire->etat = $etat;
         }
 
@@ -28,11 +34,11 @@ class NavireController extends Controller
     public function getNavire($navire_id): View
     {
         $navire =  Navire::where('id', $navire_id)->first();
-            $count = User::where('navire_id', $navire->id)->count();
-            $navire->count = $count;
+        $count = User::where('navire_id', $navire->id)->count();
+        $navire->count = $count;
 
-            $etat = $navire->coque + $navire->misaine + $navire->mat + $navire->cachots + $navire->cabines + $navire->gouvernail + $navire->voiles + $navire->pavillon + $navire->pont + $navire->canons; // QUESTION faire plus simple ?
-            $navire->etat = $etat;
+        $etat = $navire->coque + $navire->misaine + $navire->mat + $navire->cachots + $navire->cabines + $navire->gouvernail + $navire->voiles + $navire->pavillon + $navire->pont + $navire->canons; // QUESTION faire plus simple ?
+        $navire->etat = $etat;
 
         return view('navires.navire', [
             'navire' => $navire,

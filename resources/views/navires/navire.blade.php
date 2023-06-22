@@ -5,9 +5,9 @@
     <div class="bg-image h-100" style="background-image: url('https://mdbootstrap.com/img/Photos/new-templates/tables/img2.jpg');">
         <div class="mask d-flex align-items-center h-100" style="background-color: rgba(0,0,0,.25);">
             <div class="container">
-                <h1>NAVIRE</h1>
                 <div class="row justify-content-center">
-                    <div class="col-12">
+                    <h1>NAVIRE</h1>
+                    <div class="col-18">
                         <div class="card bg-dark shadow-2-strong">
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -15,17 +15,12 @@
                                         <thead>
                                             <tr>
                                                 <th scope="col">NOM</th>
-                                                <th scope="col">BOIS DE CONSTRUCTION</th>
-                                                <th scope="col">Coque</th>
-                                                <th scope="col">Misaine</th>
-                                                <th scope="col">Mat</th>
-                                                <th scope="col">Cachots</th>
-                                                <th scope="col">Cabines</th>
-                                                <th scope="col">Gouvernail</th>
-                                                <th scope="col">Voiles</th>
-                                                <th scope="col">Pavillon</th>
-                                                <th scope="col">Pont</th>
-                                                <th scope="col">Canons</th>
+                                                <th scope="col">BOIS DE CONSTRUCTION</th> 
+                                                @foreach ($navire->getFillable() as $index => $item)
+                                                    @if ($index >= 2)
+                                                        <th scope="col">{{ ucfirst($item) }}</th>
+                                                    @endif
+                                                @endforeach
                                                 <th scope="col">ETAT GLOBAL</th>
                                                 <th scope="col">NOMBRE D'HOMMES D'EQUIPAGE</th>
 
