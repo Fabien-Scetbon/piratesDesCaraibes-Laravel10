@@ -14,7 +14,7 @@
                             <div class="form-group row">
                                 <label for="pseudo" class="col-md-4 col-form-label text-md-right">Pseudo</label>
                                 <div class="col-md-6">
-                                    <input type="text" id="pseudo" class="form-control" name="pseudo" required autofocus>
+                                    <input type="text" id="pseudo" class="form-control" name="pseudo" value="{{ old('pseudo') }}" required autofocus>
                                     @if ($errors->has('pseudo'))
                                     <span class="text-danger">{{ $errors->first('pseudo') }}</span>
                                     @endif
@@ -24,7 +24,7 @@
                             <div class="form-group row">
                                 <label for="email_address" class="col-md-4 col-form-label text-md-right">Email</label>
                                 <div class="col-md-6">
-                                    <input type="text" id="email_address" class="form-control" name="email" required autofocus>
+                                    <input type="text" id="email_address" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
                                     @if ($errors->has('email'))
                                     <span class="text-danger">{{ $errors->first('email') }}</span>
                                     @endif

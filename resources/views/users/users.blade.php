@@ -13,30 +13,49 @@
                                 <div class="table-responsive">
                                     <table class="table table-dark table-borderless mb-0">
                                         <thead>
-                                            <tr>                                                
+                                            <tr>      
+                                                <th scope="col">No</th>                                          
                                                 <th scope="col">Navire</th>
                                                 <th scope="col">Nom</th>
-                                                <th scope="col">Prenom</th>
+                                                <th scope="col">Prénom</th>
                                                 <th scope="col">Pseudo</th>
                                                 <th scope="col">Email</th>
                                                 <th scope="col">Age</th>
                                                 <th scope="col">Description</th>
-                                                <th scope="col">Specialites</th>
+                                                <th scope="col">Spécialites</th>
                                                 <th scope="col">Capitaine</th>
+                                                <th scope="col">Date d'arrivée</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                         @forelse ($users as $user)
-                                            <tr>
-                                                <th scope="row">{{ $user->navire_id }}</th>
+                                            <tr>                                                
+                                                <th scope="row">{{ $user->id }}</th>
+                                                <td>{{ $user->navire }}</td>
                                                 <td>{{ $user->nom }}</td>
                                                 <td>{{ $user->prenom }}</td>
                                                 <td>{{ $user->pseudo }}</td>
                                                 <td>{{ $user->email }}</td>
                                                 <td>{{ $user->age }}</td>
-                                                <td>{{ $user->description }}</td>
-                                                <td>specialites</td>
-                                                <td>{{ $user->is_capitaine }}</td>
+                                                <td>
+                                                    {{ substr($user->description, 0, 20) }}
+                                                @if (strlen($user->description)>20)
+                                                    ...
+                                                @endif
+                                                </td>
+                                                <td>
+                                                    @foreach($user->specialites as $specialite)
+                                                    {{ $specialite->nom }}</br>
+                                                    @endforeach
+                                                </td>
+                                                <td>
+                                                @if($user->is_capitaine)
+                                                    oui
+                                                @else
+                                                    non
+                                                @endif
+                                                </td>
+                                                <td>{{ $user->created_at->format('d/m/y') }}</td>
                                             </tr>
                                         @empty
                                             <p>Pas de marin disponible</p>
@@ -46,6 +65,9 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="pagination justify-content-center">
+                        {{ $users->links() }}
                     </div>
                 </div>
             </div>
