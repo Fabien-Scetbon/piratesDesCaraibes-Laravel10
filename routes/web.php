@@ -31,3 +31,4 @@ Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 // navires
 
 Route::get('navires', [NavireController::class, 'getNavires'])->name('navires');
+Route::get('navire/{id}', [NavireController::class, 'getNavire']);
