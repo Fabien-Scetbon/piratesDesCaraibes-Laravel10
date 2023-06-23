@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Navire;
+use App\Models\Tresor;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -20,7 +21,7 @@ class NavireController extends Controller
 
         return $etat;
     }
-    
+
     public function getNavires(): View
     {
         $navires = Navire::all();
@@ -39,15 +40,16 @@ class NavireController extends Controller
 
     public function getNavire($navire_id): View
     {
-        $navire =  Navire::where('id', $navire_id)->first();
+        $navire =  Navire::find($navire_id);
         $count = User::where('navire_id', $navire->id)->count();
-        $navire->count = $count;
 
         $etat = $this->getEtat($navire);
-        $navire->etat = $etat;
 
-        return view('navires.navire', [
-            'navire' => $navire,
-        ]);
+        $totalPrix = Tresor::where('navire_id', $navire_id)->sum('prix');
+
+        $totalPoids = Tresor::where('navire_id', $navire_id)->sum('poids');
+
+        return view('navires.navire', compact('navire', 'count', 'etat', 'totalPrix', 'totalPoids')
+        );
     }
 }

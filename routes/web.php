@@ -32,9 +32,9 @@ Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 // navires
 
 Route::get('navires', [NavireController::class, 'getNavires'])->name('navires');
-Route::get('navire/{id}', [NavireController::class, 'getNavire']);
+Route::get('navire/{id}', [NavireController::class, 'getNavire'])->name('navire');;
 
 // Users
 
-Route::get('users', [UserController::class, 'getUsers'])->name('users');
+Route::get('users/{id}', [UserController::class, 'getUsers'])->name('users');
 

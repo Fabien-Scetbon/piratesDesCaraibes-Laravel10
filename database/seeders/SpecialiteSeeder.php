@@ -35,7 +35,7 @@ class SpecialiteSeeder extends Seeder
 
         // 5
         $specialite           = new Specialite();
-        $specialite->nom      = "chef d equipe";
+        $specialite->nom      = "chef d'équipe";
         $specialite->save();
 
         // 6

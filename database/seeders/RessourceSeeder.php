@@ -66,7 +66,7 @@ class RessourceSeeder extends Seeder
         $ressource             = new Ressource();
         $ressource->nom        = "patates";
         $ressource->quantite   = 4259;
-        $ressource->type       = "legume";
+        $ressource->type       = "légume";
         $ressource->navire_id  = Navire::all()->random()->id;
         $ressource->save();
     }

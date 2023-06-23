@@ -6,7 +6,7 @@
         <div class="mask d-flex align-items-center h-100" style="background-color: rgba(0,0,0,.25);">
             <div class="container">
                 <div class="row justify-content-center">
-                    <h1>MARINS</h1>
+                    <h1>MARINS DU {{ $navire }}</h1>
                     <div class="col-18">
                         <div class="card bg-dark shadow-2-strong">
                             <div class="card-body">
@@ -15,7 +15,6 @@
                                         <thead>
                                             <tr>      
                                                 <th scope="col">No</th>                                          
-                                                <th scope="col">Navire</th>
                                                 <th scope="col">Nom</th>
                                                 <th scope="col">Prénom</th>
                                                 <th scope="col">Pseudo</th>
@@ -31,7 +30,6 @@
                                         @forelse ($users as $user)
                                             <tr>                                                
                                                 <th scope="row">{{ $user->id }}</th>
-                                                <td>{{ $user->navire }}</td>
                                                 <td>{{ $user->nom ?? 'inconnu' }}</td>
                                                 <td>{{ $user->prenom ?? 'inconnu' }}</td>
                                                 <td>{{ $user->pseudo }}</td>

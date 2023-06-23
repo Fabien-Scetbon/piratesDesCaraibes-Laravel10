@@ -9,16 +9,11 @@ use Illuminate\View\View;
 
 class UserController extends Controller
 {
-    public function getUsers(): View
+    public function getUsers($navire_id): View
     {
-        $users = User::paginate(5);
-        foreach ($users as $user) {
-            $navire = $user->navireUser->nom;
-            $user->navire = $navire;
-        }
+        $users = User::where('navire_id', $navire_id)->paginate(5); // paginate remplace ->get()
+        $navire = Navire::where('id', $navire_id)->value('nom');
 
-        return view('users.users', [
-            'users' => $users,
-        ]);
+        return view('users.users', compact('users', 'navire'));
     }
 }

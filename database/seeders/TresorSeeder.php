@@ -17,7 +17,7 @@ class TresorSeeder extends Seeder
         // 1
         $tresor                 = new Tresor();
         $tresor->nom            = "pierres precieuses";
-        $tresor->description    = "Pierres volees aux Indes";
+        $tresor->description    = "Pierres volées aux Indes";
         $tresor->prix           = 547;
         $tresor->poids          = 0.8;
         $tresor->etat           = "neuf";
@@ -27,27 +27,27 @@ class TresorSeeder extends Seeder
         // 2
         $tresor                 = new Tresor();
         $tresor->nom            = "statuettes";
-        $tresor->description    = "Statuettes volees aux Incas";
+        $tresor->description    = "Statuettes volées aux Incas";
         $tresor->prix           = 2126;
         $tresor->poids          = 5.6;
-        $tresor->etat           = "use";
+        $tresor->etat           = "usé";
         $tresor->navire_id      = Navire::all()->random()->id;
         $tresor->save();
 
         // 3
         $tresor                 = new Tresor();
         $tresor->nom            = "tableaux";
-        $tresor->description    = "Tableaux voles au Louvre";
+        $tresor->description    = "Tableaux volés au Louvre";
         $tresor->prix           = 14096;
         $tresor->poids          = 10.4;
-        $tresor->etat           = "abime";
+        $tresor->etat           = "abimé";
         $tresor->navire_id    = Navire::all()->random()->id;
         $tresor->save();
 
         // 4
         $tresor                 = new Tresor();
         $tresor->nom            = "objets en argent";
-        $tresor->description    = "Divers objets pilles sur des bateaux";
+        $tresor->description    = "Divers objets pillés sur des bâteaux";
         $tresor->prix           = 14521;
         $tresor->poids          = 320.4;
         $tresor->etat           = "neuf";
@@ -56,11 +56,11 @@ class TresorSeeder extends Seeder
 
         // 5
         $tresor                 = new Tresor();
-        $tresor->nom            = "oeuvres d\'art";
+        $tresor->nom            = "oeuvres d'art";
         $tresor->description    = "Oeuvres des quatre coins du monde";
         $tresor->prix           = 9851;
         $tresor->poids          = 38.9;
-        $tresor->etat           = "use";
+        $tresor->etat           = "usé";
         $tresor->navire_id      = Navire::all()->random()->id;
         $tresor->save();
 
