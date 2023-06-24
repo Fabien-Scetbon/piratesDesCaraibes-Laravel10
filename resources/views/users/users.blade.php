@@ -6,7 +6,7 @@
         <div class="mask d-flex align-items-center h-100" style="background-color: rgba(0,0,0,.25);">
             <div class="container">
                 <div class="row justify-content-center">
-                    <h1>MARINS DU {{ $navire }}</h1>
+                    <h1>LISTE DES MARINS DU {{ $navire->nom }}</h1>
                     <div class="col-18">
                         <div class="card bg-dark shadow-2-strong">
                             <div class="card-body">
@@ -24,12 +24,19 @@
                                                 <th scope="col">Spécialites</th>
                                                 <th scope="col">Capitaine</th>
                                                 <th scope="col">Date d'arrivée</th>
+                                                <th scope="col">Voir</th>
+                                                <th scope="col">Editer</th>
+                                                <th scope="col">Supprimer</th>
                                             </tr>
                                         </thead>
                                         <tbody>
+                                        @php
+                                        $i = 1 + ($page - 1) * 5;
+                                        @endphp
+
                                         @forelse ($users as $user)
                                             <tr>                                                
-                                                <th scope="row">{{ $user->id }}</th>
+                                                <th scope="row">{{ $i }}</th>
                                                 <td>{{ $user->nom ?? 'inconnu' }}</td>
                                                 <td>{{ $user->prenom ?? 'inconnu' }}</td>
                                                 <td>{{ $user->pseudo }}</td>
@@ -62,11 +69,29 @@
                                                 @endif
                                                 </td>
                                                 <td>{{ $user->created_at->format('d/m/y') }}</td>
+                                                <td>
+                                                    <a href='#'>
+                                                        <i style="font-size: 1.4em;padding:0.2em" class="fas fa-eye"></i>
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <a href='#'>
+                                                        <i style="font-size: 1.3em;padding:0.2em" class="fas fa-edit"></i>
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <a href='#'>
+                                                        <i style="font-size: 1.3em;padding:0.2em" class="fas fa-trash-alt"></i>
+                                                    </a>
+                                                </td>
                                             </tr>
-                                        @empty
-                                            <p>Pas de marin disponible</p>
-                                        @endforelse
+                                        @php
+                                            $i++;
+                                        @endphp
                                         </tbody>
+                                        @empty
+                                            <p style="color:white">Pas de marin disponible</p>
+                                        @endforelse
                                     </table>
                                 </div>
                             </div>

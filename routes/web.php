@@ -38,3 +38,8 @@ Route::get('navire/{id}', [NavireController::class, 'getNavire'])->name('navire'
 
 Route::get('users/{id}', [UserController::class, 'getUsers'])->name('users');
 
+// search users by specialite
+
+Route::post('/searchSpecialite/{id}', [UserController::class, 'searchSpecialite']);
+
+
