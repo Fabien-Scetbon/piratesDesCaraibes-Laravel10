@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
             NavireSeeder::class,
         ]);
 
-        \App\Models\User::factory(20)->create();
+        \App\Models\User::factory(50)->create();
 
         $this->call([
             SpecialiteSeeder::class,

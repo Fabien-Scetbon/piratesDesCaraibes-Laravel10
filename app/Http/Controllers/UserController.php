@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Navire;
 use App\Models\Specialite;
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -33,7 +34,7 @@ class UserController extends Controller
         return view('users.users', array_merge(compact('users'), $datas));
     }
 
-    public function searchSpecialite(Request $request, $navire_id) // QUESTION pas de type :view car else return pas view
+    public function searchSpecialite(Request $request, $navire_id): View|RedirectResponse
     {
         if ($request->input('specialite') !== NULL) {
         $specialiteId = $request->input('specialite');
@@ -58,5 +59,13 @@ class UserController extends Controller
         $datas = $this->getDatas($navire_id);
 
         return view('users.users', array_merge(compact('users'), $datas));
+    }
+
+    public function getUser($user_id): View
+    {
+        $user =  User::find($user_id);
+
+        
+        return view('users.user', compact('user'));
     }
 }

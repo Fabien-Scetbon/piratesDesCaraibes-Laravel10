@@ -12,7 +12,7 @@
     <script src="https://kit.fontawesome.com/6b7f99e3c4.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    @include('partials.searchbar')
+    @include('partials.navbar')
     @yield('content')
 </body>
 </html>

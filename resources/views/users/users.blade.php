@@ -1,6 +1,8 @@
 @extends('layouts.master')
 
 @section('content')
+@include('partials.searchbar')
+
 <section class="intro">
     <div class="bg-image h-100" style="background-image: url('https://mdbootstrap.com/img/Photos/new-templates/tables/img2.jpg');">
         <div class="mask d-flex align-items-center h-100" style="background-color: rgba(0,0,0,.25);">

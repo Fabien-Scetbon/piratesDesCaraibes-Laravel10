@@ -13,39 +13,12 @@ class SpecialiteSeeder extends Seeder
      */
     public function run(): void
     {
-        // 1
-        $specialite           = new Specialite();
-        $specialite->nom      = "vigie";
-        $specialite->save();
+        $liste = ['vigie', 'voleur', 'cuisinier', 'mousse', "chef d'équipe", 'sabreur', 'navigateur', 'ingénieur'];
 
-        // 2
-        $specialite           = new Specialite();
-        $specialite->nom      = "voleur";
-        $specialite->save();
-
-        // 3
-        $specialite           = new Specialite();
-        $specialite->nom      = "cuisinier";
-        $specialite->save();
-
-        // 4
-        $specialite           = new Specialite();
-        $specialite->nom      = "mousse";
-        $specialite->save();
-
-        // 5
-        $specialite           = new Specialite();
-        $specialite->nom      = "chef d'équipe";
-        $specialite->save();
-
-        // 6
-        $specialite           = new Specialite();
-        $specialite->nom      = "sabreur";
-        $specialite->save();
-
-        // 7
-        $specialite           = new Specialite();
-        $specialite->nom      = "navigation";
-        $specialite->save();
+        foreach ($liste as $item) {
+            $specialite = new Specialite();
+            $specialite->nom      = $item;
+            $specialite->save();
+        }
     }
 }
