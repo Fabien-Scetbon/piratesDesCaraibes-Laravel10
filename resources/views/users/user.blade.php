@@ -6,7 +6,7 @@
         <div class="mask d-flex align-items-center h-100" style="background-color: rgba(0,0,0,.25);">
             <div class="container">
                 <div class="row justify-content-center">
-                    <h1>LISTE DES MARINS DU {{ $navire->nom }}</h1>
+                    <h1>Profil de {{ $user->pseudo }}</h1>
                     <div class="col-18">
                         <div class="card bg-dark shadow-2-strong">
                             <div class="card-body">
@@ -19,25 +19,18 @@
                                                 <th scope="col">Prénom</th>
                                                 <th scope="col">Pseudo</th>
                                                 <th scope="col">Email</th>
-                                                <th scope="col">
-                                                    <a href="/orderByAge/{{ $navire->id }}">
-                                                        Age
-                                                    </a>
-                                                </th>
+                                                <th scope="col">Age</th>
                                                 <th scope="col">Description</th>
                                                 <th scope="col">Spécialites</th>
+                                                <th scope="col">Navire</th>
                                                 <th scope="col">Capitaine</th>
                                                 <th scope="col">Date d'arrivée</th>
-                                                <th scope="col">Voir</th>
                                                 <th scope="col">Editer</th>
                                                 <th scope="col">Supprimer</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        <!-- QUESTION : numerotation bonne tech ? -->
-                                        @php    
-                                        $i = 1 + ($page - 1) * 5;
-                                        @endphp
+                                        
 
                                         @forelse ($users as $user)
                                             <tr>                                                

@@ -32,14 +32,26 @@ Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 // navires
 
 Route::get('navires', [NavireController::class, 'getNavires'])->name('navires');
-Route::get('navire/{id}', [NavireController::class, 'getNavire'])->name('navire');;
+Route::get('navire/{navire_id}', [NavireController::class, 'getNavire'])->name('navire');;
 
-// Users
+// USERS
 
-Route::get('users/{id}', [UserController::class, 'getUsers'])->name('users');
+// get users by navire
 
-// search users by specialite
+Route::get('users/{navire_id}', [UserController::class, 'getUsers'])->name('users'); // a appeler return redirect()->route('users',$navire_id);
 
-Route::post('/searchSpecialite/{id}', [UserController::class, 'searchSpecialite']);
+// search users by specialite on a navire
+
+Route::post('/searchSpecialite/{navire_id}', [UserController::class, 'searchSpecialite']);
+
+// order users by age on a navire
+
+Route::get('/orderByAge/{navire_id}', [UserController::class, 'orderByAge']);
+
+// get user profile
+
+Route::get('user/{user_id}', [UserController::class, 'getUser'])->name('user');
+
+
 
 
