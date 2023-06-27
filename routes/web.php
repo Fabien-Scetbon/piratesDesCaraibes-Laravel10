@@ -53,7 +53,7 @@ Route::controller(NavireController::class)->group(function () {
 Route::controller(UserController::class)->group(function () {
 
     // get users by navire
-    Route::get('/users/{navire_id}', 'getUsers')->name('users'); // a appeler return redirect()->route('users',$navire_id);
+    Route::get('/users/{navire_id}', 'getUsers')->name('users'); // a appeler return redirect()->route('users',$navire_id))->with([tableau asso;
 
     // search users by specialite on a navire
     Route::post('/searchSpecialite/{navire_id}', 'searchSpecialite');
@@ -61,12 +61,12 @@ Route::controller(UserController::class)->group(function () {
     // order users by age on a navire
     Route::get('/orderByAge/{navire_id}', 'orderByAge');
 
+    // create user
+    Route::get('/user/add', 'addUser')->name('addUser'); // QUESTION ordre des routes importants sinon /user/add avec add comme {user_id}
+    Route::post('/user/create', 'createUser')->name('createUser');
+
     // get user profile
     Route::get('/user/{user_id}', 'getUser')->name('user');
-
-    // create user
-    Route::get('user/add', 'addUser')->name('addUser');
-    Route::post('/user/create', 'createUser')->name('createUser');
 
 });
 

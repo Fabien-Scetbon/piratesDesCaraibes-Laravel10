@@ -28,7 +28,7 @@ class AuthController extends Controller
         ]);
     }
 
-    public function postLogin(Request $request): RedirectResponse
+    public function postLogin(Request $request): RedirectResponse  // QUESTION utiliser Validator ?
     {
         $request->validate([
             'email'     => 'required|email',

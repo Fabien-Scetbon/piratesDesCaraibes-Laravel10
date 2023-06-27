@@ -11,6 +11,11 @@
                         <div class="card bg-dark shadow-2-strong">
                             <div class="card-body">
                                 <div class="table-responsive">
+                                    <p style="color:green; text-align:center">
+                                    @if ($message)
+                                        {{ $message }}
+                                    @endif
+                                    </p>
                                     <table class="table table-dark table-borderless mb-0">
                                         <thead>
                                             <tr>      

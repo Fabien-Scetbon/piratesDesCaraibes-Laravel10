@@ -14,10 +14,15 @@
                         <div class="card bg-dark shadow-2-strong">
                             <div class="card-body">
                                 <div class="table-responsive">
+                                    <p style="color:orange; text-align:center">
+                                    @if ($message = Session::get('message'))
+                                        {{ $message }}
+                                    @endif
+                                    </p>
                                     <table class="table table-dark table-borderless mb-0">
                                         <thead>
-                                            <tr>      
-                                                <th scope="col">No</th>                                          
+                                            <tr>
+                                                <th scope="col">No</th>
                                                 <th scope="col">Nom</th>
                                                 <th scope="col">Prénom</th>
                                                 <th scope="col">Pseudo</th>
@@ -37,13 +42,13 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        <!-- QUESTION : numerotation bonne tech ? -->
-                                        @php    
-                                        $i = 1 + ($page - 1) * 5;
-                                        @endphp
+                                            <!-- QUESTION : numerotation bonne tech ? -->
+                                            @php
+                                            $i = 1 + ($page - 1) * 5;
+                                            @endphp
 
-                                        @forelse ($users as $user)
-                                            <tr>                                                
+                                            @forelse ($users as $user)
+                                            <tr>
                                                 <th scope="row">{{ $i }}</th>
                                                 <td>{{ $user->nom ?? 'inconnu' }}</td>
                                                 <td>{{ $user->prenom ?? 'inconnu' }}</td>
@@ -51,30 +56,30 @@
                                                 <td>{{ $user->email }}</td>
                                                 <td>{{ $user->age ?? 'inconnu' }}</td>
                                                 <td>
-                                                @if ($user->description)
-                                                        {{ substr($user->description, 0, 20) }}
+                                                    @if ($user->description)
+                                                    {{ substr($user->description, 0, 20) }}
                                                     @if (strlen($user->description) > 20)
-                                                        ...
+                                                    ...
                                                     @endif
-                                                @else
+                                                    @else
                                                     inconnue
-                                                @endif
+                                                    @endif
                                                 </td>
                                                 <td>
-                                                @if (count($user->specialites) != 0)
+                                                    @if (count($user->specialites) != 0)
                                                     @foreach($user->specialites as $specialite)
-                                                        {{ $specialite->nom }}</br>
+                                                    {{ $specialite->nom }}</br>
                                                     @endforeach
-                                                @else
+                                                    @else
                                                     inconnues
-                                                @endif
+                                                    @endif
                                                 </td>
                                                 <td>
-                                                @if($user->is_capitaine)
+                                                    @if($user->is_capitaine)
                                                     oui
-                                                @else
+                                                    @else
                                                     non
-                                                @endif
+                                                    @endif
                                                 </td>
                                                 <td>{{ $user->created_at->format('d/m/y') }}</td>
                                                 <td>
@@ -93,12 +98,12 @@
                                                     </a>
                                                 </td>
                                             </tr>
-                                        @php
+                                            @php
                                             $i++;
-                                        @endphp
+                                            @endphp
                                         </tbody>
                                         @empty
-                                            <p style="color:white">Pas de marin disponible</p>
+                                        <p style="color:white">Pas de marin disponible</p>
                                         @endforelse
                                     </table>
                                 </div>
