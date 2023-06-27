@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Navire;
 use App\Models\Specialite;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -67,5 +68,11 @@ class UserController extends Controller
 
         
         return view('users.user', compact('user'));
+    }
+
+    public function addUser(): View
+    {
+        $navire = Auth::user()->navireUser->nom;
+        return view('users.add', compact('navire'));
     }
 }

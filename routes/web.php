@@ -63,6 +63,11 @@ Route::controller(UserController::class)->group(function () {
 
     // get user profile
     Route::get('/user/{user_id}', 'getUser')->name('user');
+
+    // create user
+    Route::get('user/add', 'addUser')->name('addUser');
+    Route::post('/user/create', 'createUser')->name('createUser');
+
 });
 
 
