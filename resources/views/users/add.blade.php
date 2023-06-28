@@ -62,7 +62,7 @@
                                                         @foreach ($specialites as $specialite)
                                                         <input type="checkbox" name="$specialites[]" value="{{ $specialite->id }}"> {{ $specialite->nom }}<br>
                                                         @endforeach
-                                                        <input type="text" name="new_specialite" placeholder="ajouter">
+                                                        <input type="text" name="new_specialites" placeholder="nouvelles">
                                                     </td>
                                                     <td>
                                                         <input type="number" name="is_capitaine" value="0">

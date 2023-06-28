@@ -17,7 +17,7 @@ class UserController extends Controller
     private function getDatas($navire_id)   // QUESTION typer la fontion ? :array
     {
         $navire = Navire::find($navire_id);
-        $specialites = Specialite::select('id', 'nom')->get();
+        $specialites = Specialite::select('id', 'nom')->orderBy('nom')->get();
 
         if (isset($_GET['page'])) {
             $page = $_GET['page'];
@@ -56,6 +56,7 @@ class UserController extends Controller
     public function orderByAge(Request $request, $navire_id): View
     {
         $users = User::where('navire_id', $navire_id)->orderBy('age', 'asc')->paginate(5);
+
         $datas = $this->getDatas($navire_id);
 
         return view('users.users', array_merge(compact('users'), $datas));
@@ -79,11 +80,10 @@ class UserController extends Controller
     public function createUser(Request $request): RedirectResponse
     {
         $navire = Auth::user()->navireUser;
-        // $specialites = Specialite::select('id', 'nom')->get();
 
         $datas = $request->all();
 
-        // dd($datas);
+       // dd($datas['$specialites']);
 
         $validator = Validator::make($datas, [
 
@@ -115,9 +115,35 @@ class UserController extends Controller
         $datas['password'] = Hash::make($datas['password']);
         $datas['navire_id'] = $navire->id;
 
+        $spe_array = explode(' ', $datas['new_specialites']);
+
+        foreach($spe_array as $spe) {
+
+            $array = ['nom' => strtolower($spe)];
+            $validator = Validator::make($array, [
+
+                'nom' => 'string|nullable|unique:specialites',
+            ]);
+
+            if ($validator->fails()) {
+
+                return redirect('user/add')
+                    ->withErrors($validator)
+                    ->withInput();
+            }
+
+            Specialite::create($array);
+        }
+
+        $ids = Specialite::whereIn('nom', $spe_array)->pluck('id')->all();
+        // dd($ids);
+
+        $all_spes = array_merge($datas['$specialites'], $ids);
+        // dd($all_spes);
+
         $user = User::create($datas);
 
-
+        $user->specialites()->attach($all_spes);
 
         $message = $user->pseudo ." a rejoint l'équipage de " . $navire->nom." !";
 
