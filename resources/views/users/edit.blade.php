@@ -60,7 +60,7 @@
                                                     <td>
                                                         @foreach ($specialites as $specialite)
                                                         <input type="checkbox" name="$specialites[]" value="{{ $specialite->id }}"
-                                                            @if(in_array())
+                                                            @if(in_array($specialite->nom, $spe_array))
                                                                 checked
                                                             @endif
                                                         > {{ $specialite->nom }}<br>

@@ -194,8 +194,6 @@ class UserController extends Controller
 
         $datas = $request->all();
 
-        // dd($datas['$specialites']);
-
         $validator = Validator::make($datas, [
 
             'nom'           => 'string|nullable',
@@ -252,11 +250,13 @@ class UserController extends Controller
         $all_spes = array_merge($datas['$specialites'], $ids);
         // dd($all_spes);
 
-        $user = User::create($datas);
+        $user->update($datas);
+
+        $user->specialites()->detach();
 
         $user->specialites()->attach($all_spes);
 
-        $message = $user->pseudo . " a rejoint l'équipage de " . $navire->nom . " !";
+        $message = $user->pseudo . " a bien été mis à jour sur " . $navire->nom . " !";
 
         return redirect()->route('users', $navire->id)->with('message', $message);
     }
