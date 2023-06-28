@@ -40,7 +40,7 @@ class NavireController extends Controller
 
     public function getNavire($navire_id): View
     {
-        $navire =  Navire::find($navire_id);
+        $navire =  Navire::findOrFail($navire_id);
         $count = User::where('navire_id', $navire->id)->count();
 
         $etat = $this->getEtat($navire);

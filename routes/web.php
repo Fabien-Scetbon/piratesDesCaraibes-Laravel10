@@ -62,11 +62,15 @@ Route::controller(UserController::class)->group(function () {
     Route::get('/orderByAge/{navire_id}', 'orderByAge');
 
     // create user
-    Route::get('/user/add', 'addUser')->name('addUser'); // QUESTION ordre des routes importants sinon /user/add avec add comme {user_id}
-    Route::post('/user/create', 'createUser')->name('createUser');
+    Route::get('/user/add', 'addUser')->name('adduser'); // QUESTION ordre des routes importants sinon /user/add avec add comme {user_id}
+    Route::post('/user/create', 'createUser')->name('createuser');
 
     // get user profile
     Route::get('/user/{user_id}', 'getUser')->name('user');
+
+    // edit user
+    Route::get('user/edit/{user_id}', 'editUser')->name('edituser');
+    Route::put('user/update/{user_id}', 'updateUser')->name('updateuser');
 
 });
 

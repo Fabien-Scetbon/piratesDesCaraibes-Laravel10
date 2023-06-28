@@ -6,7 +6,7 @@
         <div class="mask d-flex align-items-center h-100" style="background-color: rgba(0,0,0,.25);">
             <div class="container">
                 <div class="row justify-content-center">
-                    <h1>Ajout d'un marin sur {{ $navire_nom }}</h1>
+                    <h1>Editer un marin sur {{ $navire->nom }}</h1>
                     <div class="col-18">
                         <div class="card bg-dark shadow-2-strong">
                             <div class="card-body">
@@ -16,8 +16,8 @@
                                         {{ $errors }}
                                     @endif
                                     </p>
-                                    <form action="/user/create" method="post">
-                                        @method('post')
+                                    <form action="/user/update/{{ $user->id }}" method="post">
+                                        @method('put')
                                         @csrf
                                         <table class="table table-dark table-borderless mb-0">
                                             <thead>
@@ -37,39 +37,42 @@
                                             <tbody>
                                                 <tr>
                                                     <td>
-                                                        <input type="text" name="nom" value="{{ old('nom') }}">
+                                                        <input type="text" name="nom" value="{{ $user->nom }}">
                                                     </td>
                                                     <td>
-                                                        <input type="text" name="prenom" value="{{ old('prenom') }}">
+                                                        <input type="text" name="prenom" value="{{ $user->prenom }}">
                                                     </td>
                                                     <td>
-                                                        <input type="text" name="pseudo" value="{{ old('pseudo') }}">
+                                                        <input type="text" name="pseudo" value="{{ $user->pseudo }}">
                                                     </td>
                                                     <td>
-                                                        <input type="email" name="email" value="{{ old('email') }}">
+                                                        <input type="email" name="email" value="{{ $user->email }}">
                                                     </td>
                                                     <td>
-                                                        <input type="text" name="password" value="{{ old('password') }}">
+                                                        <input type="text" name="password" value="########">
                                                     </td>
                                                     <td>
-                                                        <input type="number" name="age" value="{{ old('age') }}" min="16" max="65">
+                                                        <input type="number" name="age" value="{{ $user->age }}" min="16" max="65">
                                                     </td>
                                                     <td>
-                                                        <input type="textarea" name="description" value="{{ old('description') }}">
+                                                        <input type="textarea" name="description" value="{{ $user->description }}">
                                                     </td>
                                                     <td>
-                                                        <p>Quelles spécialités ?</p>
                                                         @foreach ($specialites as $specialite)
-                                                        <input type="checkbox" name="$specialites[]" value="{{ $specialite->id }}"> {{ $specialite->nom }}<br>
+                                                        <input type="checkbox" name="$specialites[]" value="{{ $specialite->id }}"
+                                                            @if(in_array())
+                                                                checked
+                                                            @endif
+                                                        > {{ $specialite->nom }}<br>
                                                         @endforeach
-                                                        <input type="text" name="new_specialites" placeholder="nouvelles" value="{{ old('new_specialites') }}">
+                                                        <input type="text" name="new_specialites" placeholder="nouvelles">
                                                     </td>
                                                     <td>
-                                                        <input type="number" name="is_capitaine" value="0" min="0" max="1">
+                                                        <input type="number" name="is_capitaine" value="{{ $user->is_capitaine }}" min="0" max="1">
                                                     </td>
                                                     <td>
                                                         <button type="submit">
-                                                            <i style="font-size: 1.3em;padding:0.2em" class="fas fa-user-plus"></i>
+                                                            <i style="font-size: 1.3em;padding:0.2em" class="fas fa-user-edit"></i>
                                                         </button>
                                                     </td>
                                                 </tr>

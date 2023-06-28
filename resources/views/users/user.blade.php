@@ -12,7 +12,7 @@
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <p style="color:green; text-align:center">
-                                    @if ($message)
+                                    @if (isset($message))
                                         {{ $message }}
                                     @endif
                                     </p>
