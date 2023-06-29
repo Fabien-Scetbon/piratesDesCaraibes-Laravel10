@@ -37,25 +37,25 @@
                                             <tbody>
                                                 <tr>
                                                     <td>
-                                                        <input type="text" name="nom" value="{{ $user->nom }}">
+                                                        <input type="text" name="nom" value="{{ old('nom', $user->nom) }}">
                                                     </td>
                                                     <td>
-                                                        <input type="text" name="prenom" value="{{ $user->prenom }}">
+                                                        <input type="text" name="prenom" value="{{ old('prenom', $user->prenom) }}">
                                                     </td>
                                                     <td>
-                                                        <input type="text" name="pseudo" value="{{ $user->pseudo }}">
+                                                        <input type="text" name="pseudo" value="{{ old('pseudo', $user->pseudo) }}">
                                                     </td>
                                                     <td>
-                                                        <input type="email" name="email" value="{{ $user->email }}">
+                                                        <input type="email" name="email" value="{{ old('email', $user->email) }}">
                                                     </td>
                                                     <td>
-                                                        <input type="text" name="password" value="########">
+                                                        <input type="text" name="password" placeholder="########">
                                                     </td>
                                                     <td>
-                                                        <input type="number" name="age" value="{{ $user->age }}" min="16" max="65">
+                                                        <input type="number" name="age" value="{{ old('age', $user->age) }}" min="16" max="65">
                                                     </td>
                                                     <td>
-                                                        <input type="textarea" name="description" value="{{ $user->description }}">
+                                                        <input type="textarea" name="description" value="{{ old('description', $user->description) }}">
                                                     </td>
                                                     <td>
                                                         @foreach ($specialites as $specialite)
@@ -65,10 +65,10 @@
                                                             @endif
                                                         > {{ $specialite->nom }}<br>
                                                         @endforeach
-                                                        <input type="text" name="new_specialites" placeholder="nouvelles">
+                                                        <input type="text" name="new_specialites" placeholder="nouvelles" value="{{ old('new_specialites') }}">
                                                     </td>
                                                     <td>
-                                                        <input type="number" name="is_capitaine" value="{{ $user->is_capitaine }}" min="0" max="1">
+                                                        <input type="number" name="is_capitaine" value="{{ old('is_capitaine', $user->is_capitaine) }}" min="0" max="1">
                                                     </td>
                                                     <td>
                                                         <button type="submit">

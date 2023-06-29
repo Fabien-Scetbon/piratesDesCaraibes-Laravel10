@@ -56,6 +56,29 @@ class UserController extends Controller
         return $ids;
     }
 
+    private function attachSpecialites($user, $old = null, $new = null)
+    {
+        // old et new specialites
+        if (!is_null($new) && isset($old)) {
+
+            $new_spe = $this->processNewSpecialites($new);
+            $all_spes = array_merge($old, $new_spe);
+            $user->specialites()->attach($all_spes);
+
+            // new specialites
+        } elseif (!is_null($new) && !isset($old)) {
+
+            $all_spes = $this->processNewSpecialites($new);
+            $user->specialites()->attach($all_spes);
+
+            // old specialites
+        } elseif (is_null($new) && isset($old)) {
+
+            $all_spes = $old;
+            $user->specialites()->attach($all_spes);
+        }
+    }
+
     public function getUsers($navire_id): View
     {
         $users = User::where('navire_id', $navire_id)->paginate(5); // paginate remplace ->get()
@@ -119,7 +142,7 @@ class UserController extends Controller
 
             'prenom'        => 'string|nullable',
 
-            'pseudo'        => 'string|required|max:8',
+            'pseudo'        => 'string|required|max:10',
 
             'email'         => 'email|required|unique:users',
 
@@ -145,24 +168,9 @@ class UserController extends Controller
 
         $user = User::create($datas);
 
-        // old et new specialites
-        if (!is_null($datas['new_specialites']) && isset($datas['$specialites'])) {
-
-            $new_spe = $this->processNewSpecialites($datas['new_specialites']);
-            $all_spes = array_merge($datas['$specialites'], $new_spe);
-            $user->specialites()->attach($all_spes);
-
-            // new specialites
-        } elseif (!is_null($datas['new_specialites']) && !isset($datas['$specialites'])) {
-
-            $all_spes = $this->processNewSpecialites($datas['new_specialites']);
-            $user->specialites()->attach($all_spes);
-
-            // old specialites
-        } elseif (is_null($datas['new_specialites']) && isset($datas['$specialites'])) {
-
-            $all_spes = $datas['$specialites'];
-            $user->specialites()->attach($all_spes);
+        if (!is_null($datas['new_specialites']) || isset($datas['$specialites'])) {
+            if (!isset($datas['$specialites'])) $datas['$specialites'] = null;
+            $this->attachSpecialites($user, $datas['$specialites'], $datas['new_specialites']);
         }
 
         $message = $user->pseudo . " a rejoint l'équipage de " . $navire->nom . " !";
@@ -180,7 +188,7 @@ class UserController extends Controller
 
         $spe_array = [];
 
-        foreach($specialites_user as $spe) {
+        foreach ($specialites_user as $spe) {
             array_push($spe_array, $spe->nom);
         }
 
@@ -200,11 +208,11 @@ class UserController extends Controller
 
             'prenom'        => 'string|nullable',
 
-            'pseudo'        => 'string|required|max:8',
+            'pseudo'        => 'string|required|max:10',
 
-            'email'         => 'email|required|unique:users',
+            'email'         => 'email|required',
 
-            'password'      => 'string|required|min:6',
+            'password'      => 'string|nullable|min:6',
 
             'age'           => 'integer|nullable|min:16|max:65',
 
@@ -216,49 +224,49 @@ class UserController extends Controller
 
         if ($validator->stopOnFirstFailure()->fails()) {
 
-            return redirect('user/add')
+            return redirect("user/edit/$user->id")
                 ->withErrors($validator)
                 ->withInput();
         }
 
-        $datas['password'] = Hash::make($datas['password']);
-        $datas['navire_id'] = $navire->id;
+        $email_exists = User::where('id', '!=', $user->id)->where('email', $request->input('email'))->exists();
 
-        $spe_array = explode(' ', $datas['new_specialites']);
-
-        foreach ($spe_array as $spe) {
-
-            $array = ['nom' => strtolower($spe)];
-            $validator = Validator::make($array, [
-
-                'nom' => 'string|nullable|unique:specialites',
-            ]);
-
-            if ($validator->fails()) {
-
-                return redirect('user/add')
-                    ->withErrors($validator)
-                    ->withInput();
-            }
-
-            Specialite::create($array);
+        if ($email_exists) {
+            return redirect("user/edit/$user->id")
+                ->withErrors('Cet Email est deja utilise !')
+                ->withInput();
         }
 
-        $ids = Specialite::whereIn('nom', $spe_array)->pluck('id')->all();
-        // dd($ids);
+        if (isset($datas['password'])) {
+            $datas['password'] = Hash::make($datas['password']);
+        } else {
+            $datas['password'] = $user->password;
+        }
 
-        $all_spes = array_merge($datas['$specialites'], $ids);
-        // dd($all_spes);
+        $datas['navire_id'] = $navire->id;
 
         $user->update($datas);
 
         $user->specialites()->detach();
 
-        $user->specialites()->attach($all_spes);
+        if (!is_null($datas['new_specialites']) || isset($datas['$specialites'])) {
+            if (!isset($datas['$specialites'])) $datas['$specialites'] = null;
+            $this->attachSpecialites($user, $datas['$specialites'], $datas['new_specialites']);
+        }
 
         $message = $user->pseudo . " a bien été mis à jour sur " . $navire->nom . " !";
 
         return redirect()->route('users', $navire->id)->with('message', $message);
+    }
+
+    public function deleteUser($user_id): RedirectResponse
+    {
+        $navire_id = Auth::user()->navireUser->id;
+        $user =  User::findOrFail($user_id);
+
+        $user->delete();
+
+        return redirect()->route('users',$navire_id)->with('success', 'Marin supprime !');
     }
 
     // pour sup de user ->  Detach all roles from the user...$user->roles()->detach();

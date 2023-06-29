@@ -28,7 +28,7 @@
                                                 <th scope="col">Pseudo</th>
                                                 <th scope="col">Email</th>
                                                 <th scope="col">
-                                                    <a href="/orderByAge/{{ $navire->id }}">
+                                                    <a href="{{ route('orderbyage',$navire->id) }}">
                                                         Age
                                                     </a>
                                                 </th>
@@ -83,17 +83,17 @@
                                                 </td>
                                                 <td>{{ $user->created_at->format('d/m/y') }}</td>
                                                 <td>
-                                                    <a href='#'>
+                                                    <a href="{{ route('user',$user->id) }}">
                                                         <i style="font-size: 1.4em;padding:0.2em" class="fas fa-eye"></i>
                                                     </a>
                                                 </td>
                                                 <td>
-                                                    <a href='#'>
+                                                    <a href="{{ route('edituser',$user->id) }}">
                                                         <i style="font-size: 1.3em;padding:0.2em" class="fas fa-edit"></i>
                                                     </a>
                                                 </td>
                                                 <td>
-                                                    <a href='#'>
+                                                    <a href="{{ route('deleteuser',$user->id) }}">
                                                         <i style="font-size: 1.3em;padding:0.2em" class="fas fa-trash-alt"></i>
                                                     </a>
                                                 </td>
