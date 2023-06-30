@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Navire;
 use App\Models\Tresor;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -40,6 +41,12 @@ class NavireController extends Controller
 
     public function getNavire($navire_id): View
     {
+        $auth_specialites = Auth::user()->specialites->pluck('nom')->toArray();
+        $is_cuisinier = in_array('cuisinier', $auth_specialites) ? true : false;
+        $is_ingenieur = in_array('ingenieur', $auth_specialites) ? true : false;
+
+
+        // dd($auth);
         $navire =  Navire::findOrFail($navire_id);
         $count = User::where('navire_id', $navire->id)->count();
 
@@ -49,7 +56,7 @@ class NavireController extends Controller
 
         $totalPoids = Tresor::where('navire_id', $navire_id)->sum('poids');
 
-        return view('navires.navire', compact('navire', 'count', 'etat', 'totalPrix', 'totalPoids')
+        return view('navires.navire', compact('navire', 'count', 'etat', 'totalPrix', 'totalPoids', 'is_cuisinier', 'is_ingenieur')
         );
     }
 }

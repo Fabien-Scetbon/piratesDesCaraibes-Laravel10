@@ -31,22 +31,12 @@ Route::controller(AuthController::class)->group(function () {
     Route::get('/logout', 'logout')->name('logout');
 });
 
-// Route::get('/login', [AuthController::class, 'index'])->name('login');
-// Route::post('/post-login', [AuthController::class, 'postLogin'])->name('login.post');
-// Route::get('/registration', [AuthController::class, 'registration'])->name('register');
-// Route::post('/post-registration', [AuthController::class, 'postRegistration'])->name('register.post');
-// Route::get('/dashboard', [AuthController::class, 'dashboard']);
-// Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
-
 // NAVIRES
 
 Route::controller(NavireController::class)->group(function () {
     Route::get('/navires', 'getNavires')->name('navires');
     Route::get('/navire/{navire_id}', 'getNavire')->name('navire');
 });
-
-// Route::get('/navires', [NavireController::class, 'getNavires'])->name('navires');
-// Route::get('/navire/{navire_id}', [NavireController::class, 'getNavire'])->name('navire');
 
 // USERS
 
@@ -77,9 +67,3 @@ Route::controller(UserController::class)->group(function () {
 
 
 });
-
-
-// Route::get('/users/{navire_id}', [UserController::class, 'getUsers'])->name('users'); // a appeler return redirect()->route('users',$navire_id);
-// Route::post('/searchSpecialite/{navire_id}', [UserController::class, 'searchSpecialite']);
-// Route::get('/orderByAge/{navire_id}', [UserController::class, 'orderByAge']);
-// Route::get('/user/{user_id}', [UserController::class, 'getUser'])->name('user');

@@ -2,13 +2,13 @@
     <div class="container">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="#">Lien 1</a>
+                <a class="nav-link" href="#">Voir navires</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Lien 2</a>
+                <a class="nav-link" href="#">Voir profil</a>
             </li>
         </ul>
-        <span class="navbar-brand mx-auto">Mon Titre</span>
+        <span class="navbar-brand mx-auto">Pirates des Caraĩbes</span>
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
                 <a class="nav-link" href="#">Lien 3</a>

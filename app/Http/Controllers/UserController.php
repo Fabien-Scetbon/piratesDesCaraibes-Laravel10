@@ -264,9 +264,11 @@ class UserController extends Controller
         $navire_id = Auth::user()->navireUser->id;
         $user =  User::findOrFail($user_id);
 
+        $user->specialites()->detach();
+
         $user->delete();
 
-        return redirect()->route('users',$navire_id)->with('success', 'Marin supprime !');
+        return redirect()->route('users',$navire_id)->with('message', 'Marin supprime !');
     }
 
     // pour sup de user ->  Detach all roles from the user...$user->roles()->detach();

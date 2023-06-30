@@ -9,15 +9,15 @@
         <div class="mask d-flex align-items-center h-100" style="background-color: rgba(0,0,0,.25);">
             <div class="container">
                 <div class="row justify-content-center">
-                    <h1>LISTE DES MARINS DU {{ $navire->nom }}</h1>
+                    <h2>LISTE DES MARINS SUR {{ $navire->nom }}</h2>
                     <div class="col-18">
                         <div class="card bg-dark shadow-2-strong">
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <p style="color:orange; text-align:center">
-                                    @if ($message = Session::get('message'))
+                                        @if ($message = Session::get('message'))
                                         {{ $message }}
-                                    @endif
+                                        @endif
                                     </p>
                                     <table class="table table-dark table-borderless mb-0">
                                         <thead>
@@ -93,9 +93,13 @@
                                                     </a>
                                                 </td>
                                                 <td>
-                                                    <a href="{{ route('deleteuser',$user->id) }}">
-                                                        <i style="font-size: 1.3em;padding:0.2em" class="fas fa-trash-alt"></i>
-                                                    </a>
+                                                    <form action="{{ route('deleteuser',$user->id) }}" method="POST">
+                                                        @method('DELETE')
+                                                        @csrf
+                                                        <button type="submit">
+                                                            <i style="font-size: 1.3em;padding:0.2em;color:red" class="fas fa-trash-alt"></i>
+                                                        </button>
+                                                    </form>
                                                 </td>
                                             </tr>
                                             @php

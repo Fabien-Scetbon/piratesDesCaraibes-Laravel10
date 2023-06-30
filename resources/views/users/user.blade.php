@@ -60,14 +60,18 @@
                                                 </td>
                                                 <td>{{ $user->created_at->format('d/m/Y') }}</td>
                                                 <td>
-                                                    <a href='#'>
+                                                <a href="{{ route('edituser',$user->id) }}">
                                                         <i style="font-size: 1.3em;padding:0.2em" class="fas fa-edit"></i>
                                                     </a>
                                                 </td>
                                                 <td>
-                                                    <a href='#'>
-                                                        <i style="font-size: 1.3em;padding:0.2em" class="fas fa-trash-alt"></i>
-                                                    </a>
+                                                <form action="{{ route('deleteuser',$user->id) }}" method="POST">
+                                                        @method('DELETE')
+                                                        @csrf
+                                                        <button type="submit">
+                                                            <i style="font-size: 1.3em;padding:0.2em;color:red" class="fas fa-trash-alt"></i>
+                                                        </button>
+                                                    </form>
                                                 </td>
                                             </tr>
                                         </tbody>
