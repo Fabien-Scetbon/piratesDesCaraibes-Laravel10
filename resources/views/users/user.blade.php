@@ -11,14 +11,14 @@
                         <div class="card bg-dark shadow-2-strong">
                             <div class="card-body">
                                 <div class="table-responsive">
+                                @if (isset($message))
                                     <p style="color:green; text-align:center">
-                                    @if (isset($message))
                                         {{ $message }}
-                                    @endif
                                     </p>
+                                @endif
                                     <table class="table table-dark table-borderless mb-0">
                                         <thead>
-                                            <tr>      
+                                            <tr>
                                                 <th scope="col">Nom</th>
                                                 <th scope="col">Prénom</th>
                                                 <th scope="col">Pseudo</th>
@@ -34,7 +34,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>                                                
+                                            <tr>
                                                 <td>{{ $user->nom ?? 'inconnu' }}</td>
                                                 <td>{{ $user->prenom ?? 'inconnu' }}</td>
                                                 <td>{{ $user->pseudo }}</td>
@@ -60,12 +60,12 @@
                                                 </td>
                                                 <td>{{ $user->created_at->format('d/m/Y') }}</td>
                                                 <td>
-                                                <a href="{{ route('edituser',$user->id) }}">
+                                                    <a href="{{ route('edituser',$user->id) }}">
                                                         <i style="font-size: 1.3em;padding:0.2em" class="fas fa-edit"></i>
                                                     </a>
                                                 </td>
                                                 <td>
-                                                <form action="{{ route('deleteuser',$user->id) }}" method="POST">
+                                                    <form action="{{ route('deleteuser',$user->id) }}" method="POST">
                                                         @method('DELETE')
                                                         @csrf
                                                         <button type="submit">

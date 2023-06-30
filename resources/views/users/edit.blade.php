@@ -11,9 +11,10 @@
                         <div class="card bg-dark shadow-2-strong">
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <p style="color:orange; text-align:center">
                                     @if ($errors->any())
-                                        {{ $errors }}
+                                        <p style="color:orange; text-align:center">
+                                            {{ $errors }}
+                                        </p>
                                     @endif
                                     </p>
                                     <form action="/user/update/{{ $user->id }}" method="post">
@@ -59,11 +60,10 @@
                                                     </td>
                                                     <td>
                                                         @foreach ($specialites as $specialite)
-                                                        <input type="checkbox" name="$specialites[]" value="{{ $specialite->id }}"
-                                                            @if(in_array($specialite->nom, $spe_array))
-                                                                checked
+                                                            <input type="checkbox" name="$specialites[]" value="{{ $specialite->id }}" @if(in_array($specialite->nom, $spe_array))
+                                                            checked
                                                             @endif
-                                                        > {{ $specialite->nom }}<br>
+                                                            > {{ $specialite->nom }}<br>
                                                         @endforeach
                                                         <input type="text" name="new_specialites" placeholder="nouvelles" value="{{ old('new_specialites') }}">
                                                     </td>

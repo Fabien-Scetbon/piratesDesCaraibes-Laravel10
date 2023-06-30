@@ -17,7 +17,7 @@ class SpecialiteSeeder extends Seeder
 
         foreach ($liste as $item) {
             $specialite = new Specialite();
-            $specialite->nom      = $item;
+            $specialite->nom = $item;
             $specialite->save();
         }
     }

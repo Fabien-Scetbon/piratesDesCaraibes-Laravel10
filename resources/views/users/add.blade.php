@@ -11,11 +11,11 @@
                         <div class="card bg-dark shadow-2-strong">
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <p style="color:orange; text-align:center">
                                     @if ($errors->any())
+                                    <p style="color:orange; text-align:center">
                                         {{ $errors }}
-                                    @endif
                                     </p>
+                                    @endif
                                     <form action="/user/create" method="post">
                                         @method('post')
                                         @csrf
@@ -60,7 +60,7 @@
                                                     <td>
                                                         <p>Quelles spécialités ?</p>
                                                         @foreach ($specialites as $specialite)
-                                                        <input type="checkbox" name="$specialites[]" value="{{ $specialite->id }}"> {{ $specialite->nom }}<br>
+                                                            <input type="checkbox" name="$specialites[]" value="{{ $specialite->id }}"> {{ $specialite->nom }}<br>
                                                         @endforeach
                                                         <input type="text" name="new_specialites" placeholder="nouvelles" value="{{ old('new_specialites') }}">
                                                     </td>

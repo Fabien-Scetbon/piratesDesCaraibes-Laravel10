@@ -17,6 +17,8 @@ class NavireController extends Controller
         foreach ($navire->getFillable() as $item) {
             if (is_int($navire->$item)) {
                 $etat += $navire->$item;
+                if ($navire->item < 5) $navire->alert = 'Vous avez des réparations à prévoir !';
+                if ($navire->item < 3) $navire->alert = 'Vous avez des réparations urgentes à prévoir !';
             }
         }
 
@@ -43,14 +45,14 @@ class NavireController extends Controller
     {
         $auth_specialites = Auth::user()->specialites->pluck('nom')->toArray();
         $is_cuisinier = in_array('cuisinier', $auth_specialites) ? true : false;
-        $is_ingenieur = in_array('ingenieur', $auth_specialites) ? true : false;
+        $is_ingenieur = in_array('ingénieur', $auth_specialites) ? true : false;
 
 
         // dd($auth);
         $navire =  Navire::findOrFail($navire_id);
         $count = User::where('navire_id', $navire->id)->count();
 
-        $etat = $this->getEtat($navire);
+        $etat = $this->getEtat($navire); // QUESTION mieux vaut il tout mettre dans 'navire' ?
 
         $totalPrix = Tresor::where('navire_id', $navire_id)->sum('prix');
 

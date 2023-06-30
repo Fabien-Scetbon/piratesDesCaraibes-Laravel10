@@ -14,11 +14,11 @@
                         <div class="card bg-dark shadow-2-strong">
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <p style="color:orange; text-align:center">
-                                        @if ($message = Session::get('message'))
-                                        {{ $message }}
-                                        @endif
-                                    </p>
+                                    @if ($message = Session::get('message'))
+                                        <p style="color:orange; text-align:center">
+                                            {{ $message }}
+                                        </p>
+                                    @endif
                                     <table class="table table-dark table-borderless mb-0">
                                         <thead>
                                             <tr>
@@ -43,11 +43,11 @@
                                         </thead>
                                         <tbody>
                                             <!-- QUESTION : numerotation bonne tech ? -->
-                                            @php
+                                        @php
                                             $i = 1 + ($page - 1) * 5;
-                                            @endphp
+                                        @endphp
 
-                                            @forelse ($users as $user)
+                                        @forelse ($users as $user)
                                             <tr>
                                                 <th scope="row">{{ $i }}</th>
                                                 <td>{{ $user->nom ?? 'inconnu' }}</td>
@@ -56,30 +56,30 @@
                                                 <td>{{ $user->email }}</td>
                                                 <td>{{ $user->age ?? 'inconnu' }}</td>
                                                 <td>
-                                                    @if ($user->description)
+                                                @if ($user->description)
                                                     {{ substr($user->description, 0, 20) }}
                                                     @if (strlen($user->description) > 20)
                                                     ...
                                                     @endif
-                                                    @else
+                                                @else
                                                     inconnue
-                                                    @endif
+                                                @endif
                                                 </td>
                                                 <td>
-                                                    @if (count($user->specialites) != 0)
+                                                @if (count($user->specialites) != 0)
                                                     @foreach($user->specialites as $specialite)
-                                                    {{ $specialite->nom }}</br>
+                                                        {{ $specialite->nom }}</br>
                                                     @endforeach
-                                                    @else
+                                                @else
                                                     inconnues
-                                                    @endif
+                                                @endif
                                                 </td>
                                                 <td>
-                                                    @if($user->is_capitaine)
+                                                @if($user->is_capitaine)
                                                     oui
-                                                    @else
+                                                @else
                                                     non
-                                                    @endif
+                                                @endif
                                                 </td>
                                                 <td>{{ $user->created_at->format('d/m/y') }}</td>
                                                 <td>
@@ -102,13 +102,13 @@
                                                     </form>
                                                 </td>
                                             </tr>
-                                            @php
-                                            $i++;
-                                            @endphp
-                                        </tbody>
-                                        @empty
+                                        @php
+                                        $i++;
+                                        @endphp
+                                    </tbody>
+                                    @empty
                                         <p style="color:white">Pas de marin disponible</p>
-                                        @endforelse
+                                    @endforelse
                                     </table>
                                 </div>
                             </div>
