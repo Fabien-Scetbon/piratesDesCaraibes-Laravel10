@@ -34,7 +34,7 @@
                                                 <th scope="col">Navire</th>
                                                 <th scope="col">Capitaine</th>
                                                 <th scope="col">Date d'arrivée</th>
-                                                @if(Auth::user()->id == $user->id)
+                                                @if(Auth::user()->id == $user->id || Auth::user()->is_capitaine == 1)
                                                     <th scope="col">Editer</th>
                                                 @endif
                                                 @if(Auth::user()->is_capitaine == 1)
@@ -68,7 +68,7 @@
                                                 @endif
                                                 </td>
                                                 <td>{{ $user->created_at->format('d/m/Y') }}</td>
-                                                @if(Auth::user()->id == $user->id)
+                                                @if(Auth::user()->id == $user->id || Auth::user()->is_capitaine == 1)
                                                     <td>
                                                         <a href="{{ route('edituser',$user->id) }}">
                                                             <i style="font-size: 1.3em;padding:0.2em" class="fas fa-edit"></i>

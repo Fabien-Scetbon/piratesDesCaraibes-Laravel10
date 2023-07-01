@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\User;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,10 +17,23 @@ class IsCaptain
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::user() && Auth::user()->is_capitaine == 1) {
-            return $next($request);
-        } else {
-            return redirect("/");
-        }
+        // teste si l'auth est captain ou si l'auth est le user a editer
+        if (Auth::user()) {
+
+            $authId = Auth::user()->id;
+            $user =  User::findOrFail($request->route('user_id'));
+
+            $userId = $user->id;
+
+            $isSamePerson = false;
+
+            if ($authId == $userId) $isSamePerson = true;
+
+            if (Auth::user()->is_capitaine == 1 || $isSamePerson ) {
+                return $next($request);
+            } else {
+                abort(403, "Accès interdit.");
+            }
+        } else abort(403, "Accès interdit.");
     }
 }
