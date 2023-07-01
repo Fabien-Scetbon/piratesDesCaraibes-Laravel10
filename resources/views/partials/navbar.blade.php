@@ -31,9 +31,11 @@
         <span class="navbar-brand mx-auto">Pirates des Caraĩbes</span>
         <ul class="navbar-nav ml-auto">
         @auth
+        @if (!Request::is('navire/*'))
         <li class="nav-item">
             <a class="nav-link" href="{{ route('navire',Auth::user()->navire_id) }}">Voir {{ Auth::user()->navireUser->nom}}</a>
         </li>
+        @endif
         <li class="nav-item">
             <a class="nav-link" href="{{ route('logout') }}">Débarquer</a>
         </li>

@@ -31,11 +31,11 @@ Route::controller(AuthController::class)->group(function () {
     Route::get('/logout', 'logout')->name('logout');
 });
 
-// NAVIRES
+// NAVIRES->middleware('verifyNavireId')
 
 Route::controller(NavireController::class)->group(function () {
     Route::get('/navires', 'getNavires')->name('navires');
-    Route::get('/navire/{navire_id}', 'getNavire')->middleware(['auth'])->name('navire');
+    Route::get('/navire/{navire_id}', 'getNavire')->middleware(['auth', 'verifyNavireId'])->name('navire');
 });
 
 // USERS
@@ -43,7 +43,7 @@ Route::controller(NavireController::class)->group(function () {
 Route::controller(UserController::class)->middleware(['auth'])->group(function () {
 
     // get users by navire
-    Route::get('/users/{navire_id}', 'getUsers')->name('users'); // a appeler return redirect()->route('users',$navire_id))->with([tableau asso;
+    Route::get('/users/{navire_id}', 'getUsers')->middleware(['verifyNavireId'])->name('users'); // a appeler return redirect()->route('users',$navire_id))->with([tableau asso;
 
     // search users by specialite on a navire
     Route::post('/searchSpecialite/{navire_id}', 'searchSpecialite');
@@ -54,14 +54,14 @@ Route::controller(UserController::class)->middleware(['auth'])->group(function (
     Route::prefix('user')->group(function () {
 
     // create user
-    Route::get('/add', 'addUser')->name('adduser'); // ordre des routes importants sinon /user/add avec add comme {user_id}
+    Route::get('/add', 'addUser')->middleware(['captain'])->name('adduser'); // ordre des routes importants sinon /user/add avec add comme {user_id}
     Route::post('/create', 'createUser')->name('createuser');
 
     // get user profile
-    Route::get('/{user_id}', 'getUser')->name('user');
+    Route::get('/{user_id}', 'getUser')->middleware(['isSameNavire'])->name('user');
 
     // edit user
-    Route::get('/edit/{user_id}', 'editUser')->name('edituser');
+    Route::get('/edit/{user_id}', 'editUser')->middleware(['isSameNavire', 'captain'])->name('edituser');
     Route::put('/update/{user_id}', 'updateUser')->name('updateuser');
 
     // delete user
