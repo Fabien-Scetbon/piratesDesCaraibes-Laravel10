@@ -23,9 +23,9 @@ Route::get('/', function () {
 // authentification
 
 Route::controller(AuthController::class)->group(function () {
-    Route::get('/login', 'index')->name('login');
+    Route::get('/login', 'index')->middleware(['guest'])->name('login');
     Route::post('/post-login', 'postLogin')->name('login.post');
-    Route::get('/registration', 'registration')->name('register');
+    Route::get('/registration', 'registration')->middleware(['guest'])->name('register');
     Route::post('/post-registration', 'postRegistration')->name('register.post');
     Route::get('/dashboard', 'dashboard');
     Route::get('/logout', 'logout')->name('logout');
@@ -54,7 +54,7 @@ Route::controller(UserController::class)->middleware(['auth'])->group(function (
     Route::prefix('user')->group(function () {
 
     // create user
-    Route::get('/add', 'addUser')->name('adduser'); // QUESTION ordre des routes importants sinon /user/add avec add comme {user_id}
+    Route::get('/add', 'addUser')->name('adduser'); // ordre des routes importants sinon /user/add avec add comme {user_id}
     Route::post('/create', 'createUser')->name('createuser');
 
     // get user profile
@@ -65,8 +65,7 @@ Route::controller(UserController::class)->middleware(['auth'])->group(function (
     Route::put('/update/{user_id}', 'updateUser')->name('updateuser');
 
     // delete user
-    Route::delete('/delete/{user_id}', 'deleteUser')->name('deleteuser');
+    Route::delete('/delete/{user_id}', 'deleteUser')->middleware(['captain'])->name('deleteuser');
     });
-
 
 });

@@ -36,7 +36,7 @@
                                         <tbody>
                                             <tr>
                                                 <td>{{ $navire->bois }}</td>
-                                                @if($is_ingenieur)
+                                                @if($is_ingenieur || Auth::user()->is_capitaine)
                                                     @foreach ($navire->getFillable() as $item)
                                                         @if (is_int($navire->$item))
                                                             @if ($navire->$item <= 2) <td style="color:red">{{ $navire->$item }} / 10</td>
