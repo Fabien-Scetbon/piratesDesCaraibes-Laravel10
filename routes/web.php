@@ -35,12 +35,12 @@ Route::controller(AuthController::class)->group(function () {
 
 Route::controller(NavireController::class)->group(function () {
     Route::get('/navires', 'getNavires')->name('navires');
-    Route::get('/navire/{navire_id}', 'getNavire')->name('navire');
+    Route::get('/navire/{navire_id}', 'getNavire')->middleware(['auth'])->name('navire');
 });
 
 // USERS
 
-Route::controller(UserController::class)->group(function () {
+Route::controller(UserController::class)->middleware(['auth'])->group(function () {
 
     // get users by navire
     Route::get('/users/{navire_id}', 'getUsers')->name('users'); // a appeler return redirect()->route('users',$navire_id))->with([tableau asso;
@@ -49,21 +49,24 @@ Route::controller(UserController::class)->group(function () {
     Route::post('/searchSpecialite/{navire_id}', 'searchSpecialite');
 
     // order users by age on a navire
-    Route::get('/orderByAge/{navire_id}', 'orderByAge')->name('orderbyage');;
+    Route::get('/orderByAge/{navire_id}', 'orderByAge')->name('orderbyage');
+
+    Route::prefix('user')->group(function () {
 
     // create user
-    Route::get('/user/add', 'addUser')->name('adduser'); // QUESTION ordre des routes importants sinon /user/add avec add comme {user_id}
-    Route::post('/user/create', 'createUser')->name('createuser');
+    Route::get('/add', 'addUser')->name('adduser'); // QUESTION ordre des routes importants sinon /user/add avec add comme {user_id}
+    Route::post('/create', 'createUser')->name('createuser');
 
     // get user profile
-    Route::get('/user/{user_id}', 'getUser')->name('user');
+    Route::get('/{user_id}', 'getUser')->name('user');
 
     // edit user
-    Route::get('user/edit/{user_id}', 'editUser')->name('edituser');
-    Route::put('user/update/{user_id}', 'updateUser')->name('updateuser');
+    Route::get('/edit/{user_id}', 'editUser')->name('edituser');
+    Route::put('/update/{user_id}', 'updateUser')->name('updateuser');
 
     // delete user
-    Route::delete('user/delete/{user_id}', 'deleteUser')->name('deleteuser');
+    Route::delete('/delete/{user_id}', 'deleteUser')->name('deleteuser');
+    });
 
 
 });

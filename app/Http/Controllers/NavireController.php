@@ -14,11 +14,12 @@ class NavireController extends Controller
     private function getEtat($navire): Int
     {
         $etat = 0;
-        foreach ($navire->getFillable() as $item) {
-            if (is_int($navire->$item)) {
-                $etat += $navire->$item;
-                if ($navire->item < 5) $navire->alert = 'Vous avez des réparations à prévoir !';
-                if ($navire->item < 3) $navire->alert = 'Vous avez des réparations urgentes à prévoir !';
+        foreach ($navire->getFillable() as $item_value) {
+            $navire->alert = 'Tout va bien à bord !';
+            if (is_int($navire->$item_value)) {
+                $etat += $navire->$item_value;
+                if ($navire->item_value < 5) $navire->alert = 'Vous avez des réparations à prévoir !';
+                if ($navire->item_value < 3) $navire->alert = 'Vous avez des réparations urgentes à prévoir !';
             }
         }
 

@@ -6,11 +6,11 @@
         <div class="mask d-flex align-items-center h-100" style="background-color: rgba(0,0,0,.25);">
             <div class="container">
                 <div class="row justify-content-center">
-                <h1>NAVIRES</h1>
                     <div class="col-18">
                         <div class="card bg-dark shadow-2-strong">
                             <div class="card-body">
                                 <div class="table-responsive">
+                                <h1 style="color:white;text-align:center">NAVIRES</h1>
                                     <table class="table table-dark table-borderless mb-0">
                                         <thead>
                                             <tr>

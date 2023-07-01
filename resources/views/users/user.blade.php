@@ -16,6 +16,11 @@
                                         {{ $message }}
                                     </p>
                                 @endif
+                                @if ($message = Session::get('message'))
+                                    <p style="color:orange; text-align:center">
+                                        {{ $message }}
+                                    </p>
+                                @endif
                                     <table class="table table-dark table-borderless mb-0">
                                         <thead>
                                             <tr>
@@ -29,8 +34,12 @@
                                                 <th scope="col">Navire</th>
                                                 <th scope="col">Capitaine</th>
                                                 <th scope="col">Date d'arrivée</th>
-                                                <th scope="col">Editer</th>
-                                                <th scope="col">Supprimer</th>
+                                                @if(Auth::user()->id == $user->id)
+                                                    <th scope="col">Editer</th>
+                                                @endif
+                                                @if(Auth::user()->is_capitaine == 1)
+                                                    <th scope="col">Supprimer</th>
+                                                @endif
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -59,20 +68,24 @@
                                                 @endif
                                                 </td>
                                                 <td>{{ $user->created_at->format('d/m/Y') }}</td>
-                                                <td>
-                                                    <a href="{{ route('edituser',$user->id) }}">
-                                                        <i style="font-size: 1.3em;padding:0.2em" class="fas fa-edit"></i>
-                                                    </a>
-                                                </td>
-                                                <td>
-                                                    <form action="{{ route('deleteuser',$user->id) }}" method="POST">
+                                                @if(Auth::user()->id == $user->id)
+                                                    <td>
+                                                        <a href="{{ route('edituser',$user->id) }}">
+                                                            <i style="font-size: 1.3em;padding:0.2em" class="fas fa-edit"></i>
+                                                        </a>
+                                                    </td>
+                                                @endif
+                                                @if(Auth::user()->is_capitaine == 1)
+                                                    <td>
+                                                        <form action="{{ route('deleteuser',$user->id) }}" method="POST">
                                                         @method('DELETE')
                                                         @csrf
-                                                        <button type="submit">
-                                                            <i style="font-size: 1.3em;padding:0.2em;color:red" class="fas fa-trash-alt"></i>
-                                                        </button>
-                                                    </form>
-                                                </td>
+                                                            <button type="submit">
+                                                                <i style="font-size: 1.3em;padding:0.2em;color:red" class="fas fa-trash-alt"></i>
+                                                            </button>
+                                                        </form>
+                                                    </td>
+                                                @endif
                                             </tr>
                                         </tbody>
                                     </table>

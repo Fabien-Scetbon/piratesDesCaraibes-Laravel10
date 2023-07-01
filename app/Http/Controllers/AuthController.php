@@ -42,7 +42,7 @@ class AuthController extends Controller
             
             
             return redirect()->intended('dashboard') // renvoie autom l'user vers la page a laquelle il tentait d'acceder avant connex (ici soit dashboard, soit une page protegee)
-                ->withSuccess('Tu peux monter à bord du ' . $navire . ', '.$pseudo.' !'); // ajoute mess a session flash de Laravel, detruit apres utilisation
+                ->withSuccess('Tu es monté à bord du ' . $navire . ', '.$pseudo.' !'); // ajoute mess a session flash de Laravel, detruit apres utilisation
         }
 
         return redirect("login")->withSuccess('Tu ne fais pas partie des membres d\'équipage ! Dégage !');

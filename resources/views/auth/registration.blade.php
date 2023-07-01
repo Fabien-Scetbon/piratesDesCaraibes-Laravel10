@@ -10,13 +10,13 @@
                     <div class="card-body">
 
                         <form action="{{ route('register.post') }}" method="POST">
-                            @csrf
+                        @csrf
                             <div class="form-group row">
                                 <label for="pseudo" class="col-md-4 col-form-label text-md-right">Pseudo</label>
                                 <div class="col-md-6">
                                     <input type="text" id="pseudo" class="form-control" name="pseudo" value="{{ old('pseudo') }}" required autofocus>
                                     @if ($errors->has('pseudo'))
-                                    <span class="text-danger">{{ $errors->first('pseudo') }}</span>
+                                        <span class="text-danger">{{ $errors->first('pseudo') }}</span>
                                     @endif
                                 </div>
                             </div>
@@ -26,7 +26,7 @@
                                 <div class="col-md-6">
                                     <input type="text" id="email_address" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
                                     @if ($errors->has('email'))
-                                    <span class="text-danger">{{ $errors->first('email') }}</span>
+                                        <span class="text-danger">{{ $errors->first('email') }}</span>
                                     @endif
                                 </div>
                             </div>
@@ -36,7 +36,7 @@
                                 <div class="col-md-6">
                                     <input type="password" id="password" class="form-control" name="password" required>
                                     @if ($errors->has('password'))
-                                    <span class="text-danger">{{ $errors->first('password') }}</span>
+                                        <span class="text-danger">{{ $errors->first('password') }}</span>
                                     @endif
                                 </div>
                             </div>
@@ -46,7 +46,7 @@
                                 <div class="col-md-6">
                                     <input type="password" id="password_confirmation" class="form-control" name="password_confirmation" required>
                                     @if ($errors->has('password'))
-                                    <span class="text-danger">{{ $errors->first('password') }}</span>
+                                        <span class="text-danger">{{ $errors->first('password') }}</span>
                                     @endif
                                 </div>
                             </div>
@@ -56,7 +56,7 @@
                                     <select class="form-select" name="navire_id" aria-label="Default select example" required>
                                         <option value="" selected>Choisis ton navire :</option>
                                         @foreach ($navires as $navire)
-                                        <option value="{{ $navire->id }}">{{ $navire->nom }}</option>
+                                            <option value="{{ $navire->id }}">{{ $navire->nom }}</option>
                                         @endforeach
                                     </select>
                                 </div>

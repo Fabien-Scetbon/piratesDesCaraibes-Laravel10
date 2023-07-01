@@ -8,11 +8,15 @@
                 <div class="card-header">Tout est ok !</div>
 
                 <div class="card-body">
+                @auth
                     @if (session('success'))
-                    <div class="alert alert-success" role="alert">
-                        {{ session('success') }}
-                    </div>
+                        <a href="{{ route('user' , Auth::user()->id) }}">
+                            <div class="alert alert-success" role="alert">
+                                {{ session('success') }}
+                            </div>
+                        </a>
                     @endif
+                @endauth
                 </div>
             </div>
         </div>

@@ -256,11 +256,14 @@ class UserController extends Controller
 
         $message = $user->pseudo . " a bien été mis à jour sur " . $navire->nom . " !";
 
-        return redirect()->route('users', $navire->id)->with('message', $message);
+        return redirect()->route('user', $user->id)->with('message', $message);
     }
 
     public function deleteUser($user_id): RedirectResponse
     {
+        if (Auth::user()->id == $user_id) return redirect()->back()->with('message', 'Quelle honte ! Un capitaine ne quitte pas son navire !');
+
+
         $navire_id = Auth::user()->navireUser->id;
         $user =  User::findOrFail($user_id);
 

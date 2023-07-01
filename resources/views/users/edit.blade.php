@@ -31,7 +31,9 @@
                                                     <th scope="col">Age</th>
                                                     <th scope="col">Description</th>
                                                     <th scope="col">Spécialites</th>
-                                                    <th scope="col">Capitaine</th>
+                                                    @if(Auth::user()->is_capitaine == 1)
+                                                        <th scope="col">Capitaine</th>
+                                                    @endif
                                                     <th scope="col">Valider</th>
                                                 </tr>
                                             </thead>
@@ -67,9 +69,11 @@
                                                         @endforeach
                                                         <input type="text" name="new_specialites" placeholder="nouvelles" value="{{ old('new_specialites') }}">
                                                     </td>
-                                                    <td>
-                                                        <input type="number" name="is_capitaine" value="{{ old('is_capitaine', $user->is_capitaine) }}" min="0" max="1">
-                                                    </td>
+                                                    @if(Auth::user()->is_capitaine == 1)
+                                                        <td>
+                                                            <input type="number" name="is_capitaine" value="{{ old('is_capitaine', $user->is_capitaine) }}" min="0" max="1">
+                                                        </td>
+                                                    @endif
                                                     <td>
                                                         <button type="submit">
                                                             <i style="font-size: 1.3em;padding:0.2em" class="fas fa-user-edit"></i>

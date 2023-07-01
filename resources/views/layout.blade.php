@@ -54,16 +54,23 @@
 
     <nav class="navbar navbar-expand-lg navbar-light navbar-laravel">
         <div class="container">
-            <a class="navbar-brand" href="#">Pirates</a>
+            <a class="navbar-brand" href="#">Pirates des Caraïbes</a>
             <div>
                 <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('navires') }}">Voir les navires</a>
+                    </li>
                     @guest
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}">Monter à bord</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('register') }}">S'engager</a>
-                    </li>
+                        @if (Request::path() == 'registration')
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('login') }}">Monter à bord</a>
+                            </li>
+                        @endif
+                        @if (Request::path() == 'login')
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('register') }}">S'engager</a>
+                        </li>
+                        @endif
                     @else
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('logout') }}">Débarquer</a>

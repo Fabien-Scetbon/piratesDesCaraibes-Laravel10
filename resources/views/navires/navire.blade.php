@@ -11,11 +11,13 @@
                         <div class="card bg-dark shadow-2-strong">
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    @if (isset($navire->alert))
-                                    <p style="color:orange; text-align:center">
-                                        {{ $navire->alert }}
-                                    </p>
+                                @if (isset($navire->alert))
+                                    @if($is_ingenieur || Auth::user()->is_capitaine)
+                                        <p style="color:orange; text-align:center">
+                                            {{ $navire->alert }}
+                                        </p>
                                     @endif
+                                @endif
                                     <table class="table table-dark table-borderless mb-0">
                                         <thead>
                                             <tr>
