@@ -21,13 +21,18 @@ class IsCaptain
         if (Auth::user()) {
 
             $authId = Auth::user()->id;
-            $user =  User::findOrFail($request->route('user_id'));
-
-            $userId = $user->id;
 
             $isSamePerson = false;
 
-            if ($authId == $userId) $isSamePerson = true;
+            if($request->route('user_id')) {
+
+                $user =  User::findOrFail($request->route('user_id'));
+
+                $userId = $user->id;
+    
+                if ($authId == $userId) $isSamePerson = true;
+            }
+            
 
             if (Auth::user()->is_capitaine == 1 || $isSamePerson ) {
                 return $next($request);

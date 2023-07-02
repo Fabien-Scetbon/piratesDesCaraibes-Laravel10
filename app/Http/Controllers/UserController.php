@@ -41,7 +41,8 @@ class UserController extends Controller
             ]);
 
             if ($validator->fails()) {
-                redirect('user/add')  // pas return ici sinon renvoyé dans create user et gros bug
+                redirect() // pas return ici sinon confondu avec return de fonction et renvoyé dans create user et gros bug
+                    ->back()  
                     ->withErrors($validator)
                     ->withInput()
                     ->send();
@@ -63,18 +64,21 @@ class UserController extends Controller
 
             $new_spe = $this->processNewSpecialites($new);
             $all_spes = array_merge($old, $new_spe);
+            $user->specialites()->detach();
             $user->specialites()->attach($all_spes);
 
             // new specialites
         } elseif (!is_null($new) && !isset($old)) {
 
             $all_spes = $this->processNewSpecialites($new);
+            $user->specialites()->detach();
             $user->specialites()->attach($all_spes);
 
             // old specialites
         } elseif (is_null($new) && isset($old)) {
 
             $all_spes = $old;
+            $user->specialites()->detach();
             $user->specialites()->attach($all_spes);
         }
     }
@@ -247,12 +251,8 @@ class UserController extends Controller
 
         $user->update($datas);
 
-        $user->specialites()->detach();
-
-        if (!is_null($datas['new_specialites']) || isset($datas['$specialites'])) {
-            if (!isset($datas['$specialites'])) $datas['$specialites'] = null;
-            $this->attachSpecialites($user, $datas['$specialites'], $datas['new_specialites']);
-        }
+        if (!isset($datas['$specialites'])) $datas['$specialites'] = null;
+        $this->attachSpecialites($user, $datas['$specialites'], $datas['new_specialites']);
 
         $message = $user->pseudo . " a bien été mis à jour sur " . $navire->nom . " !";
 

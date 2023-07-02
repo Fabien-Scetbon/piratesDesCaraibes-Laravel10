@@ -53,19 +53,18 @@ Route::controller(UserController::class)->middleware(['auth'])->group(function (
 
     Route::prefix('user')->group(function () {
 
-    // create user
-    Route::get('/add', 'addUser')->middleware(['captain'])->name('adduser'); // ordre des routes importants sinon /user/add avec add comme {user_id}
-    Route::post('/create', 'createUser')->name('createuser');
+        // create user
+        Route::get('/add', 'addUser')->middleware(['captain'])->name('adduser');
+        Route::post('/create', 'createUser')->name('createuser');
 
-    // get user profile
-    Route::get('/{user_id}', 'getUser')->middleware(['isSameNavire'])->name('user');
+        // get user profile
+        Route::get('/{user_id}', 'getUser')->middleware(['isSameNavire'])->name('user'); // ordre des routes important sinon /user/add avec add pris pour {user_id}
 
-    // edit user
-    Route::get('/edit/{user_id}', 'editUser')->middleware(['isSameNavire', 'captain'])->name('edituser');
-    Route::put('/update/{user_id}', 'updateUser')->name('updateuser');
+        // edit user
+        Route::get('/edit/{user_id}', 'editUser')->middleware(['isSameNavire', 'captain'])->name('edituser');
+        Route::put('/update/{user_id}', 'updateUser')->name('updateuser');
 
-    // delete user
-    Route::delete('/delete/{user_id}', 'deleteUser')->middleware(['captain'])->name('deleteuser');
+        // delete user
+        Route::delete('/delete/{user_id}', 'deleteUser')->middleware(['captain'])->name('deleteuser');
     });
-
 });

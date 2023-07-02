@@ -114,6 +114,14 @@
                                         <p style="color:white">Pas de marin disponible</p>
                                     @endforelse
                                     </table>
+                                    @if(Auth::user()->is_capitaine == 1)
+                                        <span>
+                                            <p style="color:white;display: inline;">Ajouter un marin sur {{ $navire->nom }}</p>
+                                            <a href="{{ route('adduser') }}">
+                                                <i style="font-size: 1.3em;padding:0.2em;display: inline;" class="fas fa-plus-square"></i>
+                                            </a>
+                                        </span>
+                                    @endif
                                 </div>
                             </div>
                         </div>
